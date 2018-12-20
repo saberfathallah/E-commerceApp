@@ -4,8 +4,10 @@ let userSchema = new mongoose.Schema({
   firstName: String,
   lastName: String,
   age: Number,
-  type: String,
+  type: { type: String, enum: ['admin', 'superAdmin', 'client'] },  
   adress: String,
+  mail: String,
+  password: String,
 });
 
 userSchema.toJSON = function() {
