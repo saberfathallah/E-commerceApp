@@ -10,7 +10,7 @@ app.use(bodyParser());
 
 app.use(koaJsonError({
   /* Remove stack trace from http errors */
-  postFormat: (err, obj) => omit(obj, 'stack'),
+  postFormat: (err) => console.log(`error:${err}`),
 }));
 
 app.use(Route.post('/register', register));
