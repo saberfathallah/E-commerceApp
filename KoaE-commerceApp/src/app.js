@@ -9,15 +9,14 @@ const app = new Koa();
 app.use(bodyParser());
 
 app.use(koaJsonError({
-  /* Remove stack trace from http errors */
-  postFormat: (err) => console.log(`error:${err}`),
+  postFormat: err => console.log(`error:${err}`),
 }));
 
 app.use(Route.post('/register', register));
 
 
 app.on('error', (err) => {
-    console.log(`server error ${err}`);
+  console.log(`server error ${err}`);
 });
-  
+
 export default app;

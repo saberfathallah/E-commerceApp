@@ -4,13 +4,13 @@ let userSchema = new mongoose.Schema({
   firstName: String,
   lastName: String,
   age: Number,
-  type: { type: String, enum: ['admin', 'superAdmin', 'client'] },  
+  type: { type: String, enum: ['admin', 'superAdmin', 'client'] },
   adress: String,
   mail: String,
   password: String,
 });
 
-userSchema.toJSON = function() {
+userSchema.toJSON = function () {
   return {
     id: this._id,
     firstName: this.firstName,
