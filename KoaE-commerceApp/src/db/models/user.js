@@ -12,6 +12,7 @@ let userSchema = new mongoose.Schema({
 
 userSchema.toJSON = function () {
   return {
+     /* eslint-disable no-underscore-dangle */
     id: this._id,
     firstName: this.firstName,
     lastName: this.lastName,
