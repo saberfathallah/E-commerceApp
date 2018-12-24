@@ -14,6 +14,7 @@ app.use(koaJsonError({
 
 app.use(Route.post('/register', userHandlers.register));
 app.use(Route.post('/login', userHandlers.login));
+app.use(Route.get('/users', userHandlers.getAllUsers));
 
 
 app.on('error', (err) => {

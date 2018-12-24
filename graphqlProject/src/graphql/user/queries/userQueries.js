@@ -1,18 +1,12 @@
+import getAllUsers from '../services/getAllUsers';
 
 export const Query =`
-  books: [Book]
+  getAllUsers: [User]
 `;
-const books = [
-    {
-      title: 'Harry Potter and the Chamber of Secrets',
-      author: 'J.K. Rowling',
-    },
-    {
-      title: 'Jurassic Park',
-      author: 'Michael Crichton',
-    },
-  ];
 
 export const Resolvers = {
-  books: () => books,    
+  getAllUsers: async () => {
+    const allUsers = await getAllUsers();
+    return allUsers;    
+  },    
 };
