@@ -23,8 +23,10 @@ describe('POST /register', () => {
     const response = await request(app.listen())
       .post('/register')
       .send(body);
+
     expect(response.status).toBe(200);
   });
+
   it('returns 400 when bad params', async () => {
     const body = {
       data: {
@@ -37,10 +39,10 @@ describe('POST /register', () => {
         password: 'saber',
       },
     };
-
     const response = await request(app.listen())
       .post('/register')
       .send(body);
+
     expect(response.status).toBe(400);
   });
 });

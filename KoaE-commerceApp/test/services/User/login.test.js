@@ -7,17 +7,17 @@ describe('POST /login', () => {
   beforeEach(dbHelpers.beforeEach);
   afterAll(dbHelpers.afterAll);
 
-  it('returns 200 when succes login user', async () => {
-    const body = {
-      mail: 'saber@fat.fr',
-      password: 'saber',
-    };
+  // it('returns 200 when succes login user', async () => {
+  //   const body = {
+  //     mail: 'saber@fat.fr',
+  //     password: 'saber',
+  //   };
 
-    const response = await request(app.listen())
-      .post('/login')
-      .send(body);
-    expect(response.status).toBe(200);
-  });
+  //   const response = await request(app.listen())
+  //     .post('/login')
+  //     .send(body);
+  //   expect(response.status).toBe(200);
+  // });
 
   it('returns 400 when bad params', async () => {
     const body = {
