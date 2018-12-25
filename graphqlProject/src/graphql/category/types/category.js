@@ -4,6 +4,7 @@ const category =`
     name: String
     parentId: String
     level: Int
+    categories: categoriesResultType
   }
 
   input CategoryInput {

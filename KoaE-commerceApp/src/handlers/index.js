@@ -10,6 +10,7 @@ import {
   addCategory,
   getAllCategories,
   getCategoryById,
+  getCategoriesByParentId,
 } from './Category';
 
 const userHandlers = {
@@ -24,6 +25,7 @@ const categoryHandlers = {
   addCategory,
   getAllCategories,
   getCategoryById,
+  getCategoriesByParentId,
 };
 
 export {

@@ -21,6 +21,7 @@ app.use(Route.delete('/users', userHandlers.deleteUser));
 app.use(Route.post('/categories', categoryHandlers.addCategory));
 app.use(Route.get('/categories', categoryHandlers.getAllCategories));
 app.use(Route.get('/categories/:categoryId', categoryHandlers.getCategoryById));
+app.use(Route.get('/allCategories/:categoryId', categoryHandlers.getCategoriesByParentId));
 
 app.on('error', (err) => {
   console.log(`server error ${err}`);
