@@ -3,7 +3,7 @@ import mongoose from 'mongoose';
 let categorySchema = new mongoose.Schema({
   name: String,
   level: Number,
-  parent_id: { type: mongoose.Schema.Types.ObjectId, ref: 'Category' },
+  parentId: { type: mongoose.Schema.Types.ObjectId, ref: 'Category' },
 });
 
 categorySchema.toJSON = function () {

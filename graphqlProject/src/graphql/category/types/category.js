@@ -2,13 +2,13 @@
 const category =`
   type Category {
     name: String
-    parent_id: String
+    parentId: String
     level: Int
   }
 
   input CategoryInput {
     name: String
-    parent_id: String
+    parentId: String
     level: Int
   }
 

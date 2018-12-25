@@ -6,7 +6,7 @@ import validateUserId from '../../utils/validateUserId';
 
 const schema = Joi.object().keys({
   name: Joi.string(),
-  parent_id: Joi.string(),
+  parentId: Joi.string(),
   level: Joi.number().strict().integer(),
 });
 
@@ -19,7 +19,7 @@ async function addCategory(ctx) {
     const newCategory = await Category.create({
       name: data.name,
       level: data.level,
-      parent_id: data.parent_id,
+      parentId: data.parentId,
     });
     ctx.body = newCategory;
     ctx.status = 200;
