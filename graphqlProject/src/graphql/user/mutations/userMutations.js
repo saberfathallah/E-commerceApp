@@ -1,11 +1,13 @@
-import fetch from 'node-fetch';
-import dotenv from 'dotenv';
 import loginUser from '../services/loginUser';
 import registerMicroService from '../services/registerUser';
+import deleteUser from '../services/deleteUser';
+import { combineResolvers } from 'graphql-resolvers';
+import { isAdmin } from '../../../utils/authorization';
 
 export const userMutations =`
   registerUser(input: UserInput): User
   loginUser(mail: String, password: String): userLogged
+  deleteUser(id: ID!): userdeletedType
 `;
 
 export const Resolvers = {
@@ -17,5 +19,12 @@ export const Resolvers = {
   loginUser: async (_, { mail, password }) => {
     const result = await loginUser(mail, password);
     return result;
-    }
+  },
+  deleteUser: combineResolvers(
+    isAdmin,
+    async (_, { id }, { user }) => {
+      const result = await deleteUser(id, user._id);
+      return result;
+    },
+  ),
 }
