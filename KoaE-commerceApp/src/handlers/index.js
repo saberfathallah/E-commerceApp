@@ -2,12 +2,31 @@ import {
   login,
   register,
   getAllUsers,
+  getUserById,
+  deleteUser,
 } from './User';
+
+import {
+  addCategory,
+  getAllCategories,
+  getCategoryById,
+} from './Category';
 
 const userHandlers = {
   login,
   register,
   getAllUsers,
+  getUserById,
+  deleteUser,
 };
 
-export default userHandlers;
+const categoryHandlers = {
+  addCategory,
+  getAllCategories,
+  getCategoryById,
+};
+
+export {
+  userHandlers,
+  categoryHandlers,
+};
