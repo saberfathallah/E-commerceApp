@@ -13,6 +13,14 @@ import {
   getCategoriesByParentId,
 } from './Category';
 
+import {
+  addProduct,
+  getAllProducts,
+  deleteProduct,
+  getProductById,
+  updateProduct,
+} from './Product';
+
 const userHandlers = {
   login,
   register,
@@ -28,7 +36,16 @@ const categoryHandlers = {
   getCategoriesByParentId,
 };
 
+const productHandlers = {
+  addProduct,
+  getAllProducts,
+  deleteProduct,
+  getProductById,
+  updateProduct,
+};
+
 export {
   userHandlers,
   categoryHandlers,
+  productHandlers,
 };
