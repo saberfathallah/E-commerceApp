@@ -26,6 +26,21 @@ type User {
     error: String
   }
 
+  type userResultType {
+    error: String
+    user: User
+  }
+
+  type usersResultType {
+    error: String
+    users: [User]
+  }
+
+  type userdeletedType  {
+    success: String
+    error: String
+  }
+
   type Book {
     title: String
     author: String
