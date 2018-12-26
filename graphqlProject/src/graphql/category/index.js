@@ -3,6 +3,7 @@ import * as queries from './queries/categoryQueries';
 import * as mutations from './mutations/categoryMutations';
 import category from './types/category';
 import getCategoriesByParentId from './services/getCategriesByParentId';
+import getProductsByCategoryId from './services/getProductsByCategoryId';
 
 export const { Query } = queries;
 
@@ -14,6 +15,10 @@ const TypeResolvers = {
   Category: {
     categories: async (root) => {
       const result = await getCategoriesByParentId(root._id);
+      return result;
+    },
+    products: async (root) => {
+      const result = await getProductsByCategoryId(root._id);
       return result;
     },
   },

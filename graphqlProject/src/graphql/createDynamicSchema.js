@@ -1,10 +1,12 @@
 import { gql } from 'apollo-server';
 import * as User from './user';
 import * as Category from './category';
+import * as Product from './product';
 
 const features = [
   User,
   Category,
+  Product,
 ];
 const stringDoers = field => features.reduce((acc, curr) => acc.concat(curr[field] || ''), '');
 

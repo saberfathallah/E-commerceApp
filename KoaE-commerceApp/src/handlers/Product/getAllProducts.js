@@ -1,8 +1,6 @@
 import Product from '../../db/models/product';
-import validateUserId from '../../utils/validateUserId';
 
 async function getAllProducts(ctx) {
-  validateUserId(ctx);
   try {
     const products = await Product.find();
     ctx.body = products;

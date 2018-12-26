@@ -28,6 +28,7 @@ app.use(Route.get('/products', productHandlers.getAllProducts));
 app.use(Route.delete('/products', productHandlers.deleteProduct));
 app.use(Route.get('/products/:productId', productHandlers.getProductById));
 app.use(Route.put('/products/:productId', productHandlers.updateProduct));
+app.use(Route.get('/productsByCategory/:productId', productHandlers.getProductsByCategoryId));
 
 app.on('error', (err) => {
   console.log(`server error ${err}`);

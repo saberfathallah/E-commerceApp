@@ -19,6 +19,7 @@ import {
   deleteProduct,
   getProductById,
   updateProduct,
+  getProductsByCategoryId,
 } from './Product';
 
 const userHandlers = {
@@ -42,6 +43,7 @@ const productHandlers = {
   deleteProduct,
   getProductById,
   updateProduct,
+  getProductsByCategoryId,
 };
 
 export {

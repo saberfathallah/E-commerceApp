@@ -1,8 +1,6 @@
 import Product from '../../db/models/product';
-import validateUserId from '../../utils/validateUserId';
 
 async function getProductById(ctx, productId) {
-  validateUserId(ctx);
   if (productId.match(/^[0-9a-fA-F]{24}$/)) {
     try {
       const product = await Product.findOne({ _id: productId });
