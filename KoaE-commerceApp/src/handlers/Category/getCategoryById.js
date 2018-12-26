@@ -1,8 +1,6 @@
 import Category from '../../db/models/category';
-import validateUserId from '../../utils/validateUserId';
 
 async function getCategoryById(ctx, categoryId) {
-  validateUserId(ctx);
   if (categoryId.match(/^[0-9a-fA-F]{24}$/)) {
     try {
       const category = await Category.findOne({ _id: categoryId });

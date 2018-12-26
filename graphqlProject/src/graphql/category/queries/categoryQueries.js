@@ -9,18 +9,13 @@ export const Query =`
 `;
 
 export const Resolvers = {
-  getAllCategories: combineResolvers(
-    isAuthenticated,
-    async (_, $, { user }) => {
-    const result = await getAllCategories(user._id);
+  getAllCategories:
+    async (_, $) => {
+    const result = await getAllCategories();
     return result;
-    },
-  ),
-  getCategoryBId: combineResolvers(
-    isAuthenticated,
-    async (_, { id }, { user }) => {
-    const result = await getCategoryBId(id, user._id);
+  },
+  getCategoryBId: async (_, { id }) => {
+    const result = await getCategoryBId(id);
     return result;
-    },
-  ),
+  },
 };

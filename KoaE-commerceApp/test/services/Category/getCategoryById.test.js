@@ -23,20 +23,6 @@ describe('GET /getCategoryByID', () => {
   //     expect(response.status).toBe(200);
   //   });
 
-  it('returns 422 when userid is missing', async () => {
-    await Category.create({
-      _id: '5b052c2d65955f397496b780',
-      name: 'categoryTest',
-      level: 1,
-    });
-
-    const categoryId = '5b052c2d65955f397496b788';
-    const response = await request(app.listen())
-      .get(`/categories/${categoryId}`);
-
-    expect(response.status).toBe(422);
-  });
-
   it('returns 401 when params are invalid', async () => {
     await Category.create({
       _id: '5b052c2d65955f397496b780',
@@ -45,11 +31,9 @@ describe('GET /getCategoryByID', () => {
     });
 
     const categoryId = '5b052c2d65955f397496b788';
-    const userid = '5c1d0b0797494d2beccd64eb';
 
     const response = await request(app.listen())
-      .get(`/categories/${categoryId}`)
-      .set({ userid });
+      .get(`/categories/${categoryId}`);
 
     expect(response.status).toBe(401);
   });

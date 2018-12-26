@@ -1,8 +1,6 @@
 import Category from '../../db/models/category';
-import validateUserId from '../../utils/validateUserId';
 
 async function getAllCategories(ctx) {
-  validateUserId(ctx);
   try {
     const categoris = await Category.find();
     ctx.body = categoris;
