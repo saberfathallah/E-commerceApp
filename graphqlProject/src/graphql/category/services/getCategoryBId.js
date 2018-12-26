@@ -1,5 +1,4 @@
 import fetch from 'node-fetch';
-import dotgetenv from 'dotenv';
 
 async function getCategoryMicroService(categoryId) {
   const url = `${process.env.BACK_END_SERVICES}/categories/${categoryId}`;

@@ -1,5 +1,4 @@
 import fetch from 'node-fetch';
-import dotgetenv from 'dotenv';
 
 async function deleteUserMicroService(userId, userid) {
   const url = `${process.env.BACK_END_SERVICES}/users`;
@@ -17,10 +16,9 @@ async function deleteUserMicroService(userId, userid) {
 async function deleteUser(userId, userid) {
   const result = await deleteUserMicroService(userId, userid);
   if (result.status !== 200) {
-    return { error: 'error delete user '}
-  } else {
-    return { success: 'success deleted user' };
+    return { error: 'error delete user ' };
   }
+  return { success: 'success deleted user' };
 }
 
 export default deleteUser;

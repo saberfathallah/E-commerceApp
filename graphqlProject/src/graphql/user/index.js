@@ -9,6 +9,6 @@ export const type = user;
 export const Mutation = mutations.userMutations;
 
 export const Resolvers = {
-  Query : queries.Resolvers,
+  Query: queries.Resolvers,
   Mutation: mutations.Resolvers,
 };

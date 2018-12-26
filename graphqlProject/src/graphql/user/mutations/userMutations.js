@@ -1,10 +1,11 @@
+/* eslint-disable no-underscore-dangle */
+import { combineResolvers } from 'graphql-resolvers';
 import loginUser from '../services/loginUser';
 import registerMicroService from '../services/registerUser';
 import deleteUser from '../services/deleteUser';
-import { combineResolvers } from 'graphql-resolvers';
 import { isAdmin } from '../../../utils/authorization';
 
-export const userMutations =`
+export const userMutations = `
   registerUser(input: UserInput): User
   loginUser(mail: String, password: String): userLogged
   deleteUser(id: ID!): userdeletedType
@@ -27,4 +28,4 @@ export const Resolvers = {
       return result;
     },
   ),
-}
+};

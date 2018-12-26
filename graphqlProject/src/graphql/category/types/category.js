@@ -1,5 +1,5 @@
 
-const category =`
+const category = `
   type Category {
     name: String
     parentId: String

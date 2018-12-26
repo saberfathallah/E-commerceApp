@@ -10,12 +10,12 @@ export const isAdmin = combineResolvers(
   isAuthenticated,
   (_, $, { user: { type } }) => (type === 'superAdmin'
     ? skip
-    :{ error: 'Not authorized as superAdmin.' }),
+    : { error: 'Not authorized as superAdmin.' }),
 );
 
 export function generateToken(userId) {
   return jwt.sign({
-    userid: userId
+    userid: userId,
   }, SECRET_APP, { expiresIn: Math.floor(Date.now() / 1000) + SESSION_TIME });
 }
 

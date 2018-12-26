@@ -1,7 +1,6 @@
+/* eslint-disable no-underscore-dangle */
 import fetch from 'node-fetch';
-import jwt from 'jsonwebtoken';
-import dotenv from 'dotenv';
-import { generateToken, verifyToken } from '../../../utils/authorization';
+import { generateToken } from '../../../utils/authorization';
 
 async function loginMicroService(mail, password) {
   const url = `${process.env.BACK_END_SERVICES}/login`;
@@ -14,15 +13,14 @@ async function loginMicroService(mail, password) {
   });
 }
 
-async function loginUser (mail, password) {
+async function loginUser(mail, password) {
   const result = await loginMicroService(mail, password);
   const data = await result.json();
   if (result.status !== 200) {
     return data;
-  } else {
-    const token = generateToken(data._id);        
-    return { user: data, token };
-    }
+  }
+  const token = generateToken(data._id);
+  return { user: data, token };
 }
 
-export default loginUser
+export default loginUser;
