@@ -40,10 +40,5 @@ type User {
     success: String
     error: String
   }
-
-  type Book {
-    title: String
-    author: String
-  }
 `;
 export default [user];
