@@ -1,4 +1,4 @@
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
 import Joi from 'joi';
 import User from '../../db/models/user';
 import validateSchema from '../../utils/validateSchema';
