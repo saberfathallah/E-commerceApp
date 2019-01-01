@@ -4,9 +4,7 @@ const GENERIC_THANKS = 'Merci de renseigner';
 
 export const validateMessages = {
   required: {
-    firstName: `${GENERIC_THANKS} votre Prénom`,
-    lastName: `${GENERIC_THANKS} votre Nom`,
-    email: `${GENERIC_THANKS} votre adresse E-mail`,
+    mail: `${GENERIC_THANKS} votre adresse E-mail`,
     password: `${GENERIC_THANKS} votre mot de passe.`,
 
   },

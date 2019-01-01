@@ -28,7 +28,7 @@ Login.propTypes = {
 
 function createObjectForValidate() {
   const validate = Object.assign({}, {
-    mail: [validatorsFunctions.isRequire],
+    mail: [validatorsFunctions.isRequire, validatorsFunctions.validEmail],
     password: [validatorsFunctions.isRequire],
   });
   return validate;
