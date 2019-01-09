@@ -7,6 +7,7 @@ import { isAdmin } from '../../../utils/authorization';
 
 export const userMutations = `
   registerUser(input: UserInput): User
+  addUser(input: UserInput): User
   loginUser(mail: String, password: String): userLogged
   deleteUser(id: ID!): userdeletedType
 `;
@@ -26,6 +27,14 @@ export const Resolvers = {
     async (_, { id }, { user }) => {
       const result = await deleteUser(id, user._id);
       return result;
+    },
+  ),
+  addUser: combineResolvers(
+    isAdmin,
+    async (_, { input }) => {
+      const result = await registerMicroService(input);
+      const data = await result.json();
+      return data;
     },
   ),
 };
