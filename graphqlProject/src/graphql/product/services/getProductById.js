@@ -6,7 +6,7 @@ async function getProductMicroService(productId) {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
-     },
+    },
   });
   return data;
 }
@@ -15,10 +15,9 @@ async function getProductById(productId) {
   const result = await getProductMicroService(productId);
   const product = await result.json();
   if (result.status !== 200) {
-     return { error: 'error cannot get product '}
-  } else {
-      return { product };
+    return { error: 'error cannot get product ' };
   }
+  return { product };
 }
 
 export default getProductById;

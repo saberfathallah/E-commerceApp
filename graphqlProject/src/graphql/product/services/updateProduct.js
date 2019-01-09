@@ -6,9 +6,9 @@ async function updateProductMicroServices(data, productId, userid) {
   return fetch(url, {
     method: 'PUT',
     body: JSON.stringify({ data }),
-      headers: {
-        userid,
-       'Content-Type': 'application/json',
+    headers: {
+      userid,
+      'Content-Type': 'application/json',
     },
   });
 }
@@ -16,11 +16,10 @@ async function updateProductMicroServices(data, productId, userid) {
 async function updateProduct(data, productId, userid) {
   const result = await updateProductMicroServices(data, productId, userid);
   if (result.status !== 200) {
-    return { error: 'error cannot update product'}
-  } else {
-    const product = await result.json();
-    return { product };
+    return { error: 'error cannot update product' };
   }
+  const product = await result.json();
+  return { product };
 }
 
 export default updateProduct;

@@ -1,6 +1,6 @@
 import fetch from 'node-fetch';
 
-async function getAllProductsMicroService () {
+async function getAllProductsMicroService() {
   const url = `${process.env.BACK_END_SERVICES}/products`;
   return fetch(url, {
     method: 'GET',
@@ -13,12 +13,10 @@ async function getAllProductsMicroService () {
 async function getAllProducts() {
   const result = await getAllProductsMicroService();
   if (result.status !== 200) {
-    return { error: 'error cannot get all products'}
-  } else {
-    const products = await result.json();
-    return { products };
+    return { error: 'error cannot get all products' };
   }
+  const products = await result.json();
+  return { products };
 }
 
 export default getAllProducts;
-

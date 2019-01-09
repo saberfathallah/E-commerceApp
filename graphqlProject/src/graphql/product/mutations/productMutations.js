@@ -1,8 +1,8 @@
 /* eslint-disable no-underscore-dangle */
+import { combineResolvers } from 'graphql-resolvers';
 import addProduct from '../services/addProduct';
 import updateProduct from '../services/updateProduct';
 import deleteProduct from '../services/deleteProduct';
-import { combineResolvers } from 'graphql-resolvers';
 import { isAuthenticated } from '../../../utils/authorization';
 
 export const productMutations = `
@@ -15,8 +15,8 @@ export const Resolvers = {
   addProduct: combineResolvers(
     isAuthenticated,
     async (_, { input }, { user }) => {
-    const result = await addProduct(input, user._id);
-    return result;
+      const result = await addProduct(input, user._id);
+      return result;
     },
   ),
   deleteProduct: combineResolvers(
@@ -29,8 +29,8 @@ export const Resolvers = {
   updateProduct: combineResolvers(
     isAuthenticated,
     async (_, { input, id }, { user }) => {
-    const result = await updateProduct(input, id, user._id);
-    return result;
+      const result = await updateProduct(input, id, user._id);
+      return result;
     },
   ),
-}
+};

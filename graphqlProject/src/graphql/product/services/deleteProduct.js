@@ -16,10 +16,9 @@ async function deleteProductMicroService(productId, userid) {
 async function deleteProduct(productId, userid) {
   const result = await deleteProductMicroService(productId, userid);
   if (result.status !== 200) {
-    return { error: 'error delete product '}
-  } else {
-    return { success: 'success deleted product' };
+    return { error: 'error delete product ' };
   }
+  return { success: 'success deleted product' };
 }
 
 export default deleteProduct;

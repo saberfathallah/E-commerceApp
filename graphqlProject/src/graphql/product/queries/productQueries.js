@@ -1,7 +1,5 @@
 import getAllProducts from '../services/getAllProducts';
 import getProductById from '../services/getProductById';
-import { combineResolvers } from 'graphql-resolvers';
-import { isAuthenticated } from '../../../utils/authorization';
 
 export const Query = `
   getAllProducts: productsResultType
@@ -9,7 +7,7 @@ export const Query = `
 `;
 
 export const Resolvers = {
-  getAllProducts: async (_, $) => {
+  getAllProducts: async () => {
     const result = await getAllProducts();
     return result;
   },
