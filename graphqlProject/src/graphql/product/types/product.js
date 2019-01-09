@@ -8,6 +8,7 @@ const product = `
     description: String
     categoryId: String
     image: String
+    _id: ID
   }
 
   input ProductInput {

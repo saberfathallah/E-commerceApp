@@ -1,5 +1,5 @@
 
-const user =`
+const user = `
 type User {
     firstName: String
     lastName: String
@@ -8,6 +8,7 @@ type User {
     adress: String
     mail: String
     password: String
+    _id: ID
   }
 
   input UserInput {
