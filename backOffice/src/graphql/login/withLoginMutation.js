@@ -1,5 +1,6 @@
 import { graphql } from 'react-apollo';
 import LOGIN_MUTATION from './loginMutation';
+import USER_LOGGED from '../user/getUserLogged';
 
 const withLoginMutation = graphql(LOGIN_MUTATION, {
   props: ({ mutate }) => ({
@@ -8,6 +9,11 @@ const withLoginMutation = graphql(LOGIN_MUTATION, {
         mail,
         password,
       },
+      refetchQueries: [
+        {
+          query: USER_LOGGED,
+        },
+      ],
     }),
   }),
 });
