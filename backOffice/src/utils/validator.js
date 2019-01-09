@@ -6,7 +6,18 @@ export const validateMessages = {
   required: {
     mail: `${GENERIC_THANKS} votre adresse E-mail`,
     password: `${GENERIC_THANKS} votre mot de passe.`,
-
+    firstName: `${GENERIC_THANKS} votre prénon.`,
+    lastName: `${GENERIC_THANKS} votre non.`,
+    adress: `${GENERIC_THANKS} votre adresse.`,
+    age: `${GENERIC_THANKS} votre age.`,
+    name: `${GENERIC_THANKS} le nom..`,
+    level: `${GENERIC_THANKS} le level de la categorie.`,
+    brand: `${GENERIC_THANKS} la marque du produit.`,
+    price: `${GENERIC_THANKS} le le prix du produit.`,
+    quantity: `${GENERIC_THANKS} le quanity du produit.`,
+    description: `${GENERIC_THANKS} la description du produit.`,
+    image: `${GENERIC_THANKS} l'image du produit.`,
+    categoryId: `${GENERIC_THANKS} le categorie du produit.`,
   },
   validEmail: 'Le format de votre adresse Email est incorrect. Merci de recommencer.',
   validPassword: 'Votre mot de passe doit comporter 8 caractères minimum, avec au moins 1 lettre, 1 chiffre et 1 caractère spécial (?!:;,&*-/+#$...)',
@@ -26,6 +37,10 @@ export const validateFunctions = {
   isRequire: {
     passed: (value = '') => (value !== ''),
     message: (key = '') => (validateMessages.required[key]),
+  },
+  hasNumber: {
+    passed: (value = '') => (value === '' || /.*[0-9].*/.test(value)),
+    message: () => ('Nombre'),
   },
 };
 
