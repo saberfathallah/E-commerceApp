@@ -11,6 +11,8 @@ import {
   getAllCategories,
   getCategoryById,
   getCategoriesByParentId,
+  updateCategory,
+  deleteCategory,
 } from './Category';
 
 import {
@@ -35,6 +37,8 @@ const categoryHandlers = {
   getAllCategories,
   getCategoryById,
   getCategoriesByParentId,
+  updateCategory,
+  deleteCategory,
 };
 
 const productHandlers = {
