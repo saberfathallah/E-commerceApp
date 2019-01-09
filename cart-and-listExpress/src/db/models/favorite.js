@@ -1,8 +1,12 @@
+/* eslint-disable prefer-destructuring */
 import mongoose from 'mongoose';
+// eslint-disable-next-line no-var
+var Schema = mongoose.Schema;
+const ObjectId = Schema.ObjectId;
 
 let favoriteSchema = new mongoose.Schema({
-  productId: String,
-  userId: String,
+  productId: ObjectId,
+  userId: ObjectId,
 });
 
 favoriteSchema.toJSON = function () {
