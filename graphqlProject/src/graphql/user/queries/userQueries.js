@@ -7,6 +7,7 @@ import { isAuthenticated } from '../../../utils/authorization';
 export const Query = `
   getAllUsers: usersResultType
   getUserById(id: ID!): userResultType
+  getUserlogged: User
 `;
 
 export const Resolvers = {
@@ -23,5 +24,9 @@ export const Resolvers = {
       const result = await getUserById(id, user._id);
       return result;
     },
+  ),
+  getUserlogged: combineResolvers(
+    isAuthenticated,
+    async (_, $, { user }) => user,
   ),
 };
