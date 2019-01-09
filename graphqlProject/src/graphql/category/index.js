@@ -13,13 +13,19 @@ export const Mutation = mutations.categoryMutations;
 
 const TypeResolvers = {
   Category: {
-    categories: async (root) => {
-      const result = await getCategoriesByParentId(root._id);
-      return result;
+    categoriesDetails: async (root) => {
+      const categories = await getCategoriesByParentId(root._id);
+      return {
+        categories: { categories: categories.categories },
+        numberOfCategories: categories.categories.length,
+      };
     },
-    products: async (root) => {
-      const result = await getProductsByCategoryId(root._id);
-      return result;
+    productsDetails: async (root) => {
+      const products = await getProductsByCategoryId(root._id);
+      return {
+        products: { products: products.products },
+        numberOfProducts: products.products.length,
+      };
     },
   },
 };
