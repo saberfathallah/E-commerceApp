@@ -1,4 +1,3 @@
-
 import Joi from 'joi';
 import Category from '../../db/models/category';
 import validateSchema from '../../utils/validateSchema';
@@ -6,8 +5,8 @@ import validateUserId from '../../utils/validateUserId';
 
 const schema = Joi.object().keys({
   name: Joi.string(),
-  parentId: Joi.string(),
   level: Joi.number().strict().integer(),
+  parentId: Joi.string(),
 });
 
 async function addCategory(ctx) {
