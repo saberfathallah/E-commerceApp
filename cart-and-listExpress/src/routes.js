@@ -1,4 +1,4 @@
-import routesFavorite from './routes/favorites/favoritesRoutes';
+import routesFavorite from './routes/favoritesRoutes';
 
 export default (app) => {
   app.use('/favorites', routesFavorite);
