@@ -22,7 +22,7 @@ async function addProduct(ctx) {
   try {
     const newProduct = await Product.create({
       name: data.name,
-      band: data.brand,
+      brand: data.brand,
       price: data.price,
       image: data.image,
       quantity: data.quantity,
