@@ -5,13 +5,13 @@ import { get } from 'lodash';
 import PropTypes from 'prop-types';
 import { compose } from 'react-apollo';
 import { Form, Container, Button, Input } from 'semantic-ui-react';
-import { withRouter, Link } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 
 import withLoginMutation from '../../graphql/login/withLoginMutation';
 import ErrorMessage from '../../utils/errorMessage';
 import validatorsFunctions, { validateObject } from '../../utils/validator';
 import { setCookie } from '../../utils/cookiesStore';
-
+import withLoginWrapper from './withLoginWrapper';
 
 Login.propTypes = {
   values: PropTypes.shape({
@@ -23,6 +23,7 @@ Login.propTypes = {
   handleSubmit: PropTypes.func,
   errors: PropTypes.object,
   touched: PropTypes.object,
+  className: PropTypes.string,
   // history: PropTypes.object,
 };
 
@@ -50,7 +51,7 @@ const formikHoc = withFormik({
       });
     } else {
       setCookie('token', get(user, 'data.loginUser.token'), { path: '/' });
-      props.history.push('/home');
+      props.history.push('/');
     }
   },
 });
@@ -59,39 +60,40 @@ function Login(props) {
   const isBadMail = !!(props.touched.mail && props.errors.mail);
   const isBadPassword = !!(props.touched.password && props.errors.password);
   return (
-    <Form onSubmit={props.handleSubmit} className="form">
-      <Form.Field>
-        <Input
-          placeholder="*mail"
-          maxLength="80"
-          value={props.values.mail}
-          onChange={props.handleChange}
-          onBlur={props.handleBlur}
-          type="mail"
-          name="mail"
-          error={isBadMail}
-        />
-        {isBadMail && <ErrorMessage error={props.errors.mail} />}
-      </Form.Field>
-      <Form.Field>
-        <Input
-          placeholder="*Mot de Passe"
-          maxLength="80"
-          value={props.values.password}
-          onChange={props.handleChange}
-          onBlur={props.handleBlur}
-          type="password"
-          name="password"
-          error={isBadPassword}
-        />
-        {isBadPassword && <ErrorMessage error={props.errors.password} />}
-      </Form.Field>
-      <Container fluid textAlign="center" className="submit-container">
-        <Button primary type="submit">CONNEXION</Button>
-      </Container>
-      <Link to="/register">registre</Link>
-    </Form>
+    <div className={props.className}>
+      <Form onSubmit={props.handleSubmit} className="form">
+        <Form.Field>
+          <Input
+            placeholder="*mail"
+            maxLength="80"
+            value={props.values.mail}
+            onChange={props.handleChange}
+            onBlur={props.handleBlur}
+            type="mail"
+            name="mail"
+            error={isBadMail}
+          />
+          {isBadMail && <ErrorMessage error={props.errors.mail} />}
+        </Form.Field>
+        <Form.Field>
+          <Input
+            placeholder="*Mot de Passe"
+            maxLength="80"
+            value={props.values.password}
+            onChange={props.handleChange}
+            onBlur={props.handleBlur}
+            type="password"
+            name="password"
+            error={isBadPassword}
+          />
+          {isBadPassword && <ErrorMessage error={props.errors.password} />}
+        </Form.Field>
+        <Container className="submit-container">
+          <Button primary type="submit">CONNEXION</Button>
+        </Container>
+      </Form>
+    </div>
   );
 }
 
-export default compose(withLoginMutation, formikHoc, withRouter)(Login);
+export default compose(withLoginWrapper, withLoginMutation, formikHoc, withRouter)(Login);
