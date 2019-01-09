@@ -6,7 +6,7 @@ async function getCategoryMicroService(categoryId) {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
-     },
+    },
   });
   return data;
 }
@@ -15,10 +15,9 @@ async function getCategoryById(categoryId) {
   const result = await getCategoryMicroService(categoryId);
   const category = await result.json();
   if (result.status !== 200) {
-     return { error: 'error cannot get category '}
-  } else {
-      return { category };
+    return { error: 'error cannot get category ' };
   }
+  return { category };
 }
 
 export default getCategoryById;
