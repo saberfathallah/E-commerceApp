@@ -7,7 +7,7 @@ let productSchema = new mongoose.Schema({
   quantity: Number,
   image: String,
   description: String,
-  categoryId: { type: mongoose.Schema.Types.ObjectId, ref: 'Category' },
+  categoryId: { type: mongoose.Schema.Types.ObjectId, ref: 'Category', required: true },
 });
 
 productSchema.toJSON = function () {
