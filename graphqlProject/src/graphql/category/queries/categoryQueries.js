@@ -1,21 +1,25 @@
 import getAllCategories from '../services/getAllCategories';
 import getCategoryBId from '../services/getCategoryBId';
-import { combineResolvers } from 'graphql-resolvers';
-import { isAuthenticated } from '../../../utils/authorization';
+import getProductsByCategoryId from '../services/getProductsByCategoryId';
 
-export const Query =`
-  getAllCategories: categoriesResultType
-  getCategoryBId(id: ID!): categoryResultType
+export const Query = `
+  getAllCategories(hasLevel: Boolean): categoriesResultType
+  getCategoryById(id: ID!): categoryResultType
+  getProductsByCategoryId(id: ID!): productsResultType
 `;
 
 export const Resolvers = {
   getAllCategories:
-    async (_, $) => {
-    const result = await getAllCategories();
+    async (_, { hasLevel }) => {
+      const result = await getAllCategories(hasLevel);
+      return result;
+    },
+  getCategoryById: async (_, { id }) => {
+    const result = await getCategoryBId(id);
     return result;
   },
-  getCategoryBId: async (_, { id }) => {
-    const result = await getCategoryBId(id);
+  getProductsByCategoryId: async (_, { id }) => {
+    const result = await getProductsByCategoryId(id);
     return result;
   },
 };
