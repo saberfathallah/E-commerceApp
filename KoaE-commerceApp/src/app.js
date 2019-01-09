@@ -22,13 +22,15 @@ app.use(Route.post('/categories', categoryHandlers.addCategory));
 app.use(Route.get('/categories', categoryHandlers.getAllCategories));
 app.use(Route.get('/categories/:categoryId', categoryHandlers.getCategoryById));
 app.use(Route.get('/allCategories/:categoryId', categoryHandlers.getCategoriesByParentId));
+app.use(Route.delete('/categories', categoryHandlers.deleteCategory));
+app.use(Route.put('/categories/:categoryId', categoryHandlers.updateCategory));
 
 app.use(Route.post('/products', productHandlers.addProduct));
 app.use(Route.get('/products', productHandlers.getAllProducts));
 app.use(Route.delete('/products', productHandlers.deleteProduct));
 app.use(Route.get('/products/:productId', productHandlers.getProductById));
 app.use(Route.put('/products/:productId', productHandlers.updateProduct));
-app.use(Route.get('/productsByCategory/:productId', productHandlers.getProductsByCategoryId));
+app.use(Route.get('/productsByCategory/:categoryId', productHandlers.getProductsByCategoryId));
 
 app.on('error', (err) => {
   console.log(`server error ${err}`);
