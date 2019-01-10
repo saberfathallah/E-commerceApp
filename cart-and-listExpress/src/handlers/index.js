@@ -8,6 +8,8 @@ import {
   addProductToCart,
   currentCart,
   deleteCart,
+  removeItems,
+  updateItemQuantity,
 } from './cart';
 
 const favoriteHandlers = {
@@ -20,6 +22,8 @@ const cartHandlers = {
   addProductToCart,
   currentCart,
   deleteCart,
+  removeItems,
+  updateItemQuantity,
 };
 
 export {
