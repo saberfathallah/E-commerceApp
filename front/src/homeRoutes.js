@@ -9,6 +9,7 @@ import SideBare from '../src/component/sidebar';
 import USER_LOGGED from '../src/graphql/user/getUserLogged';
 import Content from '../src/component/content';
 import CatalogPage from '../src/component/catalogPage';
+import FavoriteList from '../src/component/favoriteList';
 
 function RoutesHome({ data, loading }) {
   const user = get(data, 'getUserlogged', {});
@@ -21,6 +22,7 @@ function RoutesHome({ data, loading }) {
         <SideBare />
         <Switch>
           <Route path="/" render={() => <Content user={user} />} exact />
+          <Route path="/favoriteList" render={() => <FavoriteList user={user} />} exact />
           <Route exact path="/category/:id" component={withRouter(CatalogPage)} />
         </Switch>
       </div>
