@@ -1,43 +1,59 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import ButtonExampleLabeledBasic from '../buttonHeart';
+import { includes } from 'lodash';
+import AddOrRemoveFavorite from '../buttonHeart';
 import WrapperItem from './itemWrapper';
 
-function Item({
-  className, img, title, price, description,
-}) {
-  return (
-    <div className={className}>
-      <ButtonExampleLabeledBasic />
-      <div style={styles.card}>
-        <img
-          src={img}
-          style={{ width: '100%', height: 250 }}
-          alt=""
-        />
-        <h3>{title}</h3>
-        <h3>{price}</h3>
-        <p style={styles.title}>{description}</p>
-        <p>
-          <Link to="/panier" href>
-            <button style={styles.add}>
-              <span className="glyphicon glyphicon-plus" aria-hidden="true"></span>
+class Item extends Component {
+  shouldComponentUpdate(nextProps) {
+    const isFavorite = includes(this.props.favortieList, this.props.id);
+    const isFavoriteNext = includes(
+      nextProps.favortieList,
+      nextProps.id
+    );
+    return (
+      isFavorite !== isFavoriteNext);
+  }
+  render() {
+    const {
+      className, img, title, price, description, favortieList, id, user,
+    } = this.props;
+    const isFavorite = includes(favortieList, id);
+    return (
+      <div className={className}>
+        <AddOrRemoveFavorite isFavorite={isFavorite} user={user} productId={id} />
+        <div style={styles.card}>
+          <img
+            src={img}
+            style={{ width: '100%', height: 250 }}
+            alt=""
+          />
+          <h3>{title}</h3>
+          <h3>{price} {'$'}</h3>
+          <p style={styles.title}>{description}</p>
+          <p>
+            <Link to="/panier" href>
+              <button style={styles.add}>
+                <span className="glyphicon glyphicon-plus" aria-hidden="true"></span>
               Add to basket
-            </button>
-          </Link>
-        </p>
+              </button>
+            </Link>
+          </p>
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
 }
-
 Item.propTypes = {
   className: PropTypes.string,
   img: PropTypes.string,
   title: PropTypes.string,
   description: PropTypes.string,
   price: PropTypes.number,
+  favortieList: PropTypes.array,
+  id: PropTypes.string,
+  user: PropTypes.object,
 };
 
 export default WrapperItem(Item);
