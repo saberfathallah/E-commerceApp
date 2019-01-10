@@ -7,7 +7,7 @@ import { Icon } from 'semantic-ui-react';
 import Navigation from '../src/component/navigation';
 import SideBare from '../src/component/sidebar';
 import USER_LOGGED from '../src/graphql/user/getUserLogged';
-import AllItems from '../src/component/items';
+import Content from '../src/component/content';
 import CatalogPage from '../src/component/catalogPage';
 
 function RoutesHome({ data, loading }) {
@@ -20,7 +20,7 @@ function RoutesHome({ data, loading }) {
       <div style={{ display: 'flex' }}>
         <SideBare />
         <Switch>
-          <Route path="/" component={AllItems} exact />
+          <Route path="/" render={() => <Content user={user} />} exact />
           <Route exact path="/category/:id" component={withRouter(CatalogPage)} />
         </Switch>
       </div>
