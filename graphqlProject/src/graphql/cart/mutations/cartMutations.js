@@ -6,7 +6,7 @@ import updateQuantityOrRemoveProductFromCart from '../services/updateQuantityOrR
 import removeProductFromCart from '../services/removeProductFromCart';
 
 export const cartMutations = `
-  addProductToCart(productId: ID!, quantity: Int): cartResultType
+  addProductToCart(productId: ID!, quantity: Int, price: Float): cartResultType
   removeProductFromCart(productId: ID!): cartResultType
   updateQuantityOrRemoveProductFromCart(productId: ID!, quantity: Int): cartResultType
 `;
@@ -14,8 +14,8 @@ export const cartMutations = `
 export const Resolvers = {
   addProductToCart: combineResolvers(
     isAuthenticated,
-    async (_, { productId, quantity }, { user }) => {
-      const result = await addProductToCart(productId, quantity, user._id);
+    async (_, { productId, quantity, price }, { user }) => {
+      const result = await addProductToCart(productId, quantity, price, user._id);
       return result.cart;
     },
   ),

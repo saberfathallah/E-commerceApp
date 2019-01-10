@@ -1,11 +1,11 @@
 
 import fetch from 'node-fetch';
 
-async function addProductToCartMicroServices(productId, quantity, userid) {
+async function addProductToCartMicroServices(productId, quantity, price, userid) {
   const url = `${process.env.CART_AND_LISTS_SERVICES}/cart`;
   return fetch(url, {
     method: 'POST',
-    body: JSON.stringify({ productId, quantity }),
+    body: JSON.stringify({ productId, quantity, price }),
     headers: {
       userid,
       'Content-Type': 'application/json',
@@ -13,8 +13,8 @@ async function addProductToCartMicroServices(productId, quantity, userid) {
   });
 }
 
-async function addProductToCart(productId, quantity, userid) {
-  const result = await addProductToCartMicroServices(productId, quantity, userid);
+async function addProductToCart(productId, quantity, price, userid) {
+  const result = await addProductToCartMicroServices(productId, quantity, price, userid);
   if (result.status !== 200) {
     return { error: 'error cannot add product to cart' };
   }

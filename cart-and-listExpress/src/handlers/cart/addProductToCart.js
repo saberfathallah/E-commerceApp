@@ -8,6 +8,7 @@ Joi.objectId = require('joi-objectid')(Joi);
 const schema = Joi.object().keys({
   productId: Joi.objectId(),
   quantity: Joi.number().strict().integer().required(),
+  price: Joi.number().strict().integer().required(),
 });
 
 async function addProductToCart(req, res) {
