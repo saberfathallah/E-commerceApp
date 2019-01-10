@@ -1,56 +1,41 @@
 import React from 'react';
 import { graphql, compose } from 'react-apollo';
-import { map, get } from 'lodash';
+import { get } from 'lodash';
 import PropTypes from 'prop-types';
-import { Icon } from 'semantic-ui-react';
-import Item from '../item';
+import USER_LOGGED from '../../../src/graphql/user/getUserLogged';
 import getProductsByCategoryId from '../../graphql/product/queries/getProductsByCategoryId';
-import allItemsWrapper from '../items/allItemsWrapper';
+import AllItems from '../items';
 
-function CatalogPage({ className, data }) {
+function CatalogPage({ data, user }) {
   const products = get(data, 'getProductsByCategoryId.products', []);
   const loading = get(data, 'loading', []);
   const numberOfproducts = products.length;
 
-  const allProducts = map(products, (prod, index) => (
-    <Item
-      key={index}
-      img="../asset/product1.png"
-      title={prod.name}
-      description={prod.description}
-      price={prod.price}
-    />
-  ));
-
   return (
-    <div className={className} >
-      {loading ?
-        <Icon name="circle notched" loading />
-        :
-        <div>
-          {numberOfproducts === 0 ?
-            <p>impty products</p>
-            :
-            <div>
-              <p>Total: {numberOfproducts}</p>
-              <div className="articles">
-                {allProducts}
-              </div>
-            </div>
-          }
-        </div>
-      }
-    </div>
+    <AllItems
+      products={products}
+      user={user}
+      numberOfproducts={numberOfproducts}
+      loading={loading}
+    />
   );
 }
 
 CatalogPage.propTypes = {
   data: PropTypes.object,
-  className: PropTypes.string,
+  user: PropTypes.object,
 };
 
 
 export default compose(
+  graphql(USER_LOGGED, {
+    props: ({ data }) => {
+      const user = get(data, 'getUserlogged', {});
+      return ({
+        user,
+      });
+    },
+  }),
   graphql(getProductsByCategoryId, {
     options: (props) => ({
       variables: {
@@ -58,5 +43,4 @@ export default compose(
       },
     }),
   }),
-  allItemsWrapper
 )(CatalogPage);
