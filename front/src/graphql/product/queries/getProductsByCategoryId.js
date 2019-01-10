@@ -9,6 +9,7 @@ query getProductByIdCategory($id: ID!) {
       price
       quantity
       image
+      _id
     }
     error
   }

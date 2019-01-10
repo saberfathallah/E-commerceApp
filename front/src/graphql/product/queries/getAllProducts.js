@@ -9,6 +9,7 @@ export default gql`
         price
         quantity
         image
+        _id
       }
       error
     }
