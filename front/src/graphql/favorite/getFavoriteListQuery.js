@@ -5,7 +5,12 @@ query {
   getFavoriteList {
     error
     favorites {
-       productId
+      _id
+      name
+      brand
+      price
+      quantity
+      description
     }
   }
 }

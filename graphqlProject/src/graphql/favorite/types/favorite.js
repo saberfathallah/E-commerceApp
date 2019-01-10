@@ -12,7 +12,7 @@ type favoriteResultType {
 
 type favoriteListResultType {
   error: String
-  favorites: [Favorite]
+  favorites: [Product]
 }
 
 type favoriteDeletedType  {
