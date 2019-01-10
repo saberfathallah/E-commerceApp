@@ -14,12 +14,13 @@ async function addProductToCart(req, res) {
   validateUserId(req, res);
   const data = req.body;
   validateSchema(res, data, schema);
-
-  const { userid: userId } = req.headers;
-
-  const cart = await addProduct(userId, data);
-
-  res.status(200).json({ cart });
+  try {
+    const { userid: userId } = req.headers;
+    const cart = await addProduct(userId, data);
+    res.status(200).json({ cart });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
 }
 
 export default addProductToCart;

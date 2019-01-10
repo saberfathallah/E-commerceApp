@@ -6,6 +6,8 @@ import {
 
 import {
   addProductToCart,
+  currentCart,
+  deleteCart,
 } from './cart';
 
 const favoriteHandlers = {
@@ -16,6 +18,8 @@ const favoriteHandlers = {
 
 const cartHandlers = {
   addProductToCart,
+  currentCart,
+  deleteCart,
 };
 
 export {
