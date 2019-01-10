@@ -15,9 +15,8 @@ function AddOrRemoveFavorite({
     if (user.firstName) {
       if (isFavorite) {
         await deleteFavoriteMutation(productId);
-      }
-      await addFavoriteMutation(productId);
-    }
+      } else await addFavoriteMutation(productId);
+    } else alert('you need to connect');
   };
 
   return (
