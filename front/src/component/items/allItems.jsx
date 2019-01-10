@@ -4,21 +4,24 @@ import { graphql, compose } from 'react-apollo';
 import { get, map } from 'lodash';
 import { Icon } from 'semantic-ui-react';
 import getAllProducts from '../../graphql/product/queries/getAllProducts';
-
+import FAVORITE_LIST from '../../graphql/favorite/getFavoriteListQuery';
 import allItemsWrapper from './allItemsWrapper';
 import Item from '../item';
 
-function AllItems({ className, data }) {
-  const products = get(data, 'getAllProducts.products', []);
-  const numberOfproducts = products.length;
-  const loading = get(data, 'loading', true);
+function AllItems({
+  className, products, numberOfproducts, loading, favortieList, user,
+}) {
   const items = map(products, (product, index) => (
     <Item
       key={index}
+      user={user}
+      favortieList={favortieList}
       img="../asset/product1.png"
       title={product.name}
       description={product.description}
       price={product.price}
+      // eslint-disable-next-line no-underscore-dangle
+      id={product._id}
     />));
 
   return (
@@ -39,7 +42,25 @@ function AllItems({ className, data }) {
 
 AllItems.propTypes = {
   className: PropTypes.string,
-  data: PropTypes.object,
+  products: PropTypes.array,
+  user: PropTypes.object,
+  favortieList: PropTypes.array,
+  numberOfproducts: PropTypes.number,
+  loading: PropTypes.bool,
 };
 
-export default compose(allItemsWrapper, graphql(getAllProducts))(AllItems);
+export default compose(
+  allItemsWrapper,
+  graphql(getAllProducts),
+  graphql(FAVORITE_LIST, {
+    skip: ({ user }) => !get(user, 'firstName', false),
+    props: ({ data }) => {
+      const list = get(data, 'getFavoriteList.favorites', []);
+      const productsIds = map(list, (product) => product.productId);
+
+      return ({
+        favortieList: productsIds,
+      });
+    },
+  }),
+)(AllItems);
