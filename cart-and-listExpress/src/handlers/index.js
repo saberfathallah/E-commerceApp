@@ -10,6 +10,7 @@ import {
   deleteCart,
   removeItems,
   updateItemQuantity,
+  updateQuantityOrRemoveProduct,
 } from './cart';
 
 const favoriteHandlers = {
@@ -24,6 +25,7 @@ const cartHandlers = {
   deleteCart,
   removeItems,
   updateItemQuantity,
+  updateQuantityOrRemoveProduct,
 };
 
 export {

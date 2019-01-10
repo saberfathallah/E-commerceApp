@@ -7,5 +7,6 @@ routesCart.get('/', async (req, res) => cartHandlers.currentCart(req, res));
 routesCart.delete('/', async (req, res) => cartHandlers.deleteCart(req, res));
 routesCart.delete('/removeItems', async (req, res) => cartHandlers.removeItems(req, res));
 routesCart.post('/updateItemQuantity', async (req, res) => cartHandlers.updateItemQuantity(req, res));
+routesCart.delete('/updateQuantity', async (req, res) => cartHandlers.updateQuantityOrRemoveProduct(req, res));
 
 export default routesCart;
