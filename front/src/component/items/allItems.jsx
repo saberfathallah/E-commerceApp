@@ -56,7 +56,8 @@ export default compose(
     skip: ({ user }) => !get(user, 'firstName', false),
     props: ({ data }) => {
       const list = get(data, 'getFavoriteList.favorites', []);
-      const productsIds = map(list, (product) => product.productId);
+      // eslint-disable-next-line no-underscore-dangle
+      const productsIds = map(list, (product) => product._id);
 
       return ({
         favortieList: productsIds,
