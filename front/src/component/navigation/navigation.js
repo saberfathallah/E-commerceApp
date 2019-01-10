@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 import { compose } from 'react-apollo';
 import WrapperNavigation from './withNavigationWrapper';
 import { removeCookie } from '../../utils/cookiesStore';
@@ -13,7 +13,7 @@ const Navigation = ({
     <div className={className}>
       <ul className="menu">
         <li><a href="/">Home</a></li>
-        <li><a href="/">Favorites</a></li>
+        <li><Link to="/FavoriteList">Favorites</Link></li>
         <li><a href="/">Panier</a></li>
         <li><a href="/">Commandes</a></li>
       </ul>
