@@ -1,40 +1,61 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { graphql } from 'react-apollo';
-import { get, map } from 'lodash';
-import AllItems from '../items';
-import getItemsCurrentCart from '../../graphql/cart/getItemsCurrentCart';
+import { Step } from 'semantic-ui-react';
+import ContentCart from './contentCart';
 
-function Cart({ data, user }) {
-  const products = get(data, 'getItemsCurrentCart.items', []);
-  const loading = get(data, 'loading', true);
-  const numberOfproducts = products.length;
+class Cart extends Component {
+  state= {
+    active: 'cartDetails',
+    step: 1,
+  }
 
-  return (
-    <AllItems
-      isCartItem
-      products={products}
-      user={user}
-      numberOfproducts={numberOfproducts}
-      loading={loading}
-    />
-  );
+  handleClick(active, step) { this.setState({ active, step }); }
+
+  render() {
+    const { user, cart } = this.props;
+    const { active, step } = this.state;
+
+    return (
+      <div style={{ width: '100%' }}>
+        <Step.Group style={{ width: '100%' }} >
+          <Step
+            active={active === 'cartDetails'}
+            completed={active !== 'cartDetails' && step > 1}
+            icon="credit card"
+            link
+            onClick={() => this.handleClick('cartDetails', 1)}
+            title="votre pannier"
+            description="votre pannier"
+            comp
+          />
+          <Step
+            active={active === 'deliveryDetails'}
+            completed={active !== 'deliveryDetails' && step > 2}
+            icon="truck"
+            link
+            onClick={() => this.handleClick('deliveryDetails', 2)}
+            title="les details de livraison"
+            description="les details de livraison et de pannier"
+          />
+          <Step
+            active={active === 'validateCart'}
+            completed={active !== 'validateCart' && step > 3}
+            icon="credit card"
+            link
+            onClick={() => this.handleClick('validateCart', 3)}
+            title="valider mon pannier"
+            description="valider mon pannier"
+          />
+        </Step.Group>
+        <ContentCart user={user} cart={cart} active={active} />
+      </div>
+    );
+  }
 }
 
 Cart.propTypes = {
-  data: PropTypes.object,
   user: PropTypes.object,
+  cart: PropTypes.object,
 };
 
-
-export default graphql(getItemsCurrentCart, {
-  options: ({ cart }) => {
-    const products = get(cart, 'currentCart.cart.items', []);
-    const ids = map(products, (product) => product.productId);
-    return {
-      variables: {
-        ids,
-      },
-    };
-  },
-})(Cart);
+export default Cart;
