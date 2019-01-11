@@ -1,5 +1,6 @@
 
 import fetch from 'node-fetch';
+import getTotalCart from '../../../utils/getTotalCart';
 
 async function addProductToCartMicroServices(productId, quantity, price, userid) {
   const url = `${process.env.CART_AND_LISTS_SERVICES}/cart`;
@@ -19,6 +20,8 @@ async function addProductToCart(productId, quantity, price, userid) {
     return { error: 'error cannot add product to cart' };
   }
   const cart = await result.json();
+  const total = getTotalCart(cart.cart);
+  cart.cart.total = total;
   return { cart };
 }
 

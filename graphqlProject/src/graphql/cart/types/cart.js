@@ -7,6 +7,7 @@ type itemCart {
 }
 type Cart {
   userId: ID
+  total: Float
   items: [itemCart]
 }
 

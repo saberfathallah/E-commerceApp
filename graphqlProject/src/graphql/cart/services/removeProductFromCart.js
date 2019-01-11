@@ -1,5 +1,6 @@
 
 import fetch from 'node-fetch';
+import getTotalCart from '../../../utils/getTotalCart';
 
 async function removeProductFromCartMicroServices(productId, userid) {
   const url = `${process.env.CART_AND_LISTS_SERVICES}/cart/removeItems`;
@@ -19,6 +20,8 @@ async function removeProductFromCart(productId, userid) {
     return { error: 'error cannot remove product to cart' };
   }
   const cart = await result.json();
+  const total = getTotalCart(cart);
+  cart.total = total;
   return { cart };
 }
 

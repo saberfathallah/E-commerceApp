@@ -1,4 +1,5 @@
 import fetch from 'node-fetch';
+import getTotalCart from '../../../utils/getTotalCart';
 
 async function updateQuantityOrRemoveProductFromCartMicroService(productId, quantity, userid) {
   const url = `${process.env.CART_AND_LISTS_SERVICES}/cart/updateQuantity`;
@@ -20,6 +21,8 @@ async function updateQuantityOrRemoveProductFromCart(productId, quantity, userid
     return { error: 'error cannot add product to cart' };
   }
   const cart = await result.json();
+  const total = getTotalCart(cart.cart);
+  cart.cart.total = total;
   return cart;
 }
 
