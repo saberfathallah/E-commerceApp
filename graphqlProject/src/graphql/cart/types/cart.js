@@ -16,5 +16,10 @@ type cartResultType {
   cart: Cart
 }
 
+type itemsCartResultType {
+  error: String
+  items: [Product]
+}
+
 `;
 export default [cart];
