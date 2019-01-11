@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
-import { includes } from 'lodash';
+import { graphql, compose } from 'react-apollo';
+import { includes, find, get } from 'lodash';
 import AddOrRemoveFavorite from '../buttonHeart';
+import AddOrRemoveToCart from './addorRemoveToCart';
 import WrapperItem from './itemWrapper';
-
+import currentCart from '../../graphql/cart/currentCart';
 class Item extends Component {
   shouldComponentUpdate(nextProps) {
     const isFavorite = includes(this.props.favortieList, this.props.id);
@@ -13,13 +14,15 @@ class Item extends Component {
       nextProps.id
     );
     return (
+      this.props.cartItemQuantity !== nextProps.cartItemQuantity ||
       isFavorite !== isFavoriteNext);
   }
   render() {
     const {
-      className, img, title, price, description, favortieList, id, user,
+      className, img, title, price, description, favortieList, id, user, quantity, cartItemQuantity,
     } = this.props;
     const isFavorite = includes(favortieList, id);
+
     return (
       <div className={className}>
         <AddOrRemoveFavorite isFavorite={isFavorite} user={user} productId={id} />
@@ -32,14 +35,12 @@ class Item extends Component {
           <h3>{title}</h3>
           <h3>{price} {'$'}</h3>
           <p style={styles.title}>{description}</p>
-          <p>
-            <Link to="/panier" href>
-              <button style={styles.add}>
-                <span className="glyphicon glyphicon-plus" aria-hidden="true"></span>
-              Add to basket
-              </button>
-            </Link>
-          </p>
+          <AddOrRemoveToCart
+            id={id}
+            maxQuantity={quantity}
+            cartItemQuantity={cartItemQuantity}
+            price={price}
+          />
         </div>
       </div>
     );
@@ -51,12 +52,27 @@ Item.propTypes = {
   title: PropTypes.string,
   description: PropTypes.string,
   price: PropTypes.number,
+  quantity: PropTypes.number,
   favortieList: PropTypes.array,
   id: PropTypes.string,
   user: PropTypes.object,
+  cartItemQuantity: PropTypes.number,
 };
 
-export default WrapperItem(Item);
+export default compose(
+  WrapperItem,
+  graphql(currentCart, {
+    props: ({ data, ownProps }) => {
+      const items = get(data, 'currentCart.cart.items', []);
+      const item = find(items, (i) => i.productId === ownProps.id);
+      const cartItemQuantity = get(item, 'quantity', 0);
+      return {
+        cartItemQuantity,
+      };
+    },
+  })
+)(Item);
+
 const styles = {
   title: {
     color: '#808080',

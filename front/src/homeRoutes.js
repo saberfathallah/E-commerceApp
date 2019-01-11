@@ -36,7 +36,6 @@ function RoutesHome({
 RoutesHome.propTypes = {
   loading: PropTypes.bool,
   data: PropTypes.object,
-  loadingCart: PropTypes.bool,
   cart: PropTypes.object,
 };
 
