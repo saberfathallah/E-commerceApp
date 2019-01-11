@@ -3,24 +3,26 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withRouter, Link } from 'react-router-dom';
 import { compose } from 'react-apollo';
+import { get } from 'lodash';
 import WrapperNavigation from './withNavigationWrapper';
 import { removeCookie } from '../../utils/cookiesStore';
 
-const Navigation = ({
+function Navigation({
   className, user, history, cart,
-}) =>
-  (
+}) {
+  const total = get(cart, 'currentCart.cart.total', []);
+  return (
     <div className={className}>
       <ul className="menu">
         <li><a href="/">Home</a></li>
         <li><Link to="/FavoriteList">Favorites</Link></li>
-        <li><a href="/">Panier</a></li>
+        <li><Link to="/cart">Panier</Link></li>
         <li><a href="/">Commandes</a></li>
       </ul>
       <div className="right-side">
         {user.firstName ?
           <div>
-            <span className="navigation-user-name">Total panier: {cart.total} $</span>
+            <span className="navigation-user-name">Total panier: {total} $</span>
             <span className="navigation-user-name">{user.firstName} {user.lastName}</span>
             <button
               onClick={() => {
@@ -42,6 +44,7 @@ const Navigation = ({
       </div>
     </div>
   );
+}
 
 Navigation.propTypes = {
   className: PropTypes.string,
