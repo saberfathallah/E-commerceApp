@@ -9,10 +9,11 @@ import allItemsWrapper from './allItemsWrapper';
 import Item from '../item';
 
 function AllItems({
-  className, products, numberOfproducts, loading, favortieList, user,
+  className, products, numberOfproducts, loading, favortieList, user, isCartItem,
 }) {
   const items = map(products, (product, index) => (
     <Item
+      isCartItem={isCartItem}
       key={index}
       user={user}
       favortieList={favortieList}
@@ -48,6 +49,7 @@ AllItems.propTypes = {
   favortieList: PropTypes.array,
   numberOfproducts: PropTypes.number,
   loading: PropTypes.bool,
+  isCartItem: PropTypes.bool,
 };
 
 export default compose(
