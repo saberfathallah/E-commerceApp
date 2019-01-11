@@ -10,6 +10,7 @@ import USER_LOGGED from '../src/graphql/user/getUserLogged';
 import Content from '../src/component/content';
 import CatalogPage from '../src/component/catalogPage';
 import FavoriteList from '../src/component/favoriteList';
+import Cart from '../src/component/cart';
 import currentCart from './graphql/cart/currentCart';
 
 function RoutesHome({
@@ -26,6 +27,7 @@ function RoutesHome({
         <Switch>
           <Route path="/" render={() => <Content user={user} />} exact />
           <Route path="/favoriteList" render={() => <FavoriteList user={user} />} exact />
+          <Route path="/cart" render={() => <Cart user={user} cart={cart} />} exact />
           <Route exact path="/category/:id" component={withRouter(CatalogPage)} />
         </Switch>
       </div>
@@ -42,14 +44,7 @@ RoutesHome.propTypes = {
 export default compose(
   graphql(USER_LOGGED),
   graphql(currentCart, {
-    props: ({ data }) => {
-      const loadingCart = get(data, 'loading', true);
-      const cart = get(data, 'currentCart.cart', {});
-      return {
-        loadingCart,
-        cart,
-      };
-    },
+    props: ({ data }) => ({ cart: data }),
   })
 )(RoutesHome);
 
