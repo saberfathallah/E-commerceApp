@@ -4,7 +4,7 @@ import currentCart from '../currentCart';
 
 const withRemoveProductFromCartMutation = graphql(REMOVE_PRODUCT_FROM_CART_MUTATION, {
   props: ({ mutate }) => ({
-    addProductToCartMutation: (productId) => mutate({
+    removeProductFromCart: (productId) => mutate({
       variables: { productId },
       refetchQueries: [
         {

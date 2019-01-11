@@ -4,6 +4,7 @@ import { graphql, compose } from 'react-apollo';
 import { includes, find, get } from 'lodash';
 import AddOrRemoveFavorite from '../buttonHeart';
 import AddOrRemoveToCart from './addorRemoveToCart';
+import RemoveProductFromCart from './removeProductFromCart';
 import WrapperItem from './itemWrapper';
 import currentCart from '../../graphql/cart/currentCart';
 class Item extends Component {
@@ -19,12 +20,23 @@ class Item extends Component {
   }
   render() {
     const {
-      className, img, title, price, description, favortieList, id, user, quantity, cartItemQuantity,
+      className,
+      img,
+      title,
+      price,
+      description,
+      favortieList,
+      id,
+      user,
+      quantity,
+      cartItemQuantity,
+      isCartItem,
     } = this.props;
     const isFavorite = includes(favortieList, id);
 
     return (
       <div className={className}>
+        {isCartItem && <RemoveProductFromCart productId={id} />}
         <AddOrRemoveFavorite isFavorite={isFavorite} user={user} productId={id} />
         <div style={styles.card}>
           <img
@@ -56,6 +68,7 @@ Item.propTypes = {
   favortieList: PropTypes.array,
   id: PropTypes.string,
   user: PropTypes.object,
+  isCartItem: PropTypes.bool,
   cartItemQuantity: PropTypes.number,
 };
 
