@@ -1,5 +1,5 @@
 import React from 'react';
-import { graphql } from 'react-apollo';
+import { graphql, compose } from 'react-apollo';
 import { get } from 'lodash';
 import { Switch, Route, withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
@@ -10,14 +10,17 @@ import USER_LOGGED from '../src/graphql/user/getUserLogged';
 import Content from '../src/component/content';
 import CatalogPage from '../src/component/catalogPage';
 import FavoriteList from '../src/component/favoriteList';
+import currentCart from './graphql/cart/currentCart';
 
-function RoutesHome({ data, loading }) {
+function RoutesHome({
+  data, loading, cart,
+}) {
   const user = get(data, 'getUserlogged', {});
 
   if (loading) return <Icon name="circle notched" loading />;
   return (
     <div>
-      <Navigation user={user} />
+      <Navigation user={user} cart={cart} />
       <div style={{ display: 'flex' }}>
         <SideBare />
         <Switch>
@@ -33,7 +36,21 @@ function RoutesHome({ data, loading }) {
 RoutesHome.propTypes = {
   loading: PropTypes.bool,
   data: PropTypes.object,
+  loadingCart: PropTypes.bool,
+  cart: PropTypes.object,
 };
 
-export default graphql(USER_LOGGED)(RoutesHome);
+export default compose(
+  graphql(USER_LOGGED),
+  graphql(currentCart, {
+    props: ({ data }) => {
+      const loadingCart = get(data, 'loading', true);
+      const cart = get(data, 'currentCart.cart', {});
+      return {
+        loadingCart,
+        cart,
+      };
+    },
+  })
+)(RoutesHome);
 

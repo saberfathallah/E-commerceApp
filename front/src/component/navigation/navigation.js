@@ -7,7 +7,7 @@ import WrapperNavigation from './withNavigationWrapper';
 import { removeCookie } from '../../utils/cookiesStore';
 
 const Navigation = ({
-  className, user, history,
+  className, user, history, cart,
 }) =>
   (
     <div className={className}>
@@ -20,6 +20,7 @@ const Navigation = ({
       <div className="right-side">
         {user.firstName ?
           <div>
+            <span className="navigation-user-name">Total panier: {cart.total} $</span>
             <span className="navigation-user-name">{user.firstName} {user.lastName}</span>
             <button
               onClick={() => {
@@ -46,6 +47,7 @@ Navigation.propTypes = {
   className: PropTypes.string,
   history: PropTypes.object,
   user: PropTypes.object,
+  cart: PropTypes.object,
 };
 
 export default compose(WrapperNavigation, withRouter)(Navigation);
