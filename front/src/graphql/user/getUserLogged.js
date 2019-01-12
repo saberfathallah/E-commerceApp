@@ -6,6 +6,7 @@ query {
     firstName
     lastName
     type
+    adress
   }
 }
 `;
