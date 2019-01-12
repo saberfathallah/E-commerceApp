@@ -17,7 +17,7 @@ function Navigation({
         <li><a href="/">Home</a></li>
         <li><Link to="/FavoriteList">Favorites</Link></li>
         <li><Link to="/cart">Panier</Link></li>
-        <li><a href="/">Commandes</a></li>
+        <li><Link to="/orders">Commandes</Link></li>
       </ul>
       <div className="right-side">
         {user.firstName ?
