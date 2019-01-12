@@ -15,6 +15,7 @@ import {
 
 import {
   createOrder,
+  getAllOrders,
 } from './order';
 
 const favoriteHandlers = {
@@ -34,6 +35,7 @@ const cartHandlers = {
 
 const orderHandlers = {
   createOrder,
+  getAllOrders,
 };
 
 export {
