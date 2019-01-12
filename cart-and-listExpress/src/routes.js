@@ -5,5 +5,5 @@ import routesOrder from './routes/orderRoutes';
 export default (app) => {
   app.use('/favorites', routesFavorite);
   app.use('/cart', routesCart);
-  app.use('/order', routesOrder);
+  app.use('/orders', routesOrder);
 };
