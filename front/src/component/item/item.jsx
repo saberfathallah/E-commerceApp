@@ -31,6 +31,7 @@ class Item extends Component {
       quantity,
       cartItemQuantity,
       isCartItem,
+      isOrder,
     } = this.props;
     const isFavorite = includes(favortieList, id);
 
@@ -47,12 +48,14 @@ class Item extends Component {
           <h3>{title}</h3>
           <h3>{price} {'$'}</h3>
           <p style={styles.title}>{description}</p>
+          {!isOrder &&
           <AddOrRemoveToCart
             id={id}
             maxQuantity={quantity}
             cartItemQuantity={cartItemQuantity}
             price={price}
           />
+          }
         </div>
       </div>
     );
@@ -69,6 +72,7 @@ Item.propTypes = {
   id: PropTypes.string,
   user: PropTypes.object,
   isCartItem: PropTypes.bool,
+  isOrder: PropTypes.bool,
   cartItemQuantity: PropTypes.number,
 };
 

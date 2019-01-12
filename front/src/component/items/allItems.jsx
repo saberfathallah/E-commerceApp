@@ -9,10 +9,11 @@ import allItemsWrapper from './allItemsWrapper';
 import Item from '../item';
 
 function AllItems({
-  className, products, numberOfproducts, loading, favortieList, user, isCartItem,
+  className, products, numberOfproducts, loading, favortieList, user, isCartItem, isOrder,
 }) {
   const items = map(products, (product, index) => (
     <Item
+      isOrder={isOrder}
       isCartItem={isCartItem}
       key={index}
       user={user}
@@ -32,7 +33,7 @@ function AllItems({
         <Icon name="circle notched" loading />
         :
         <div>
-          <p>Total: {numberOfproducts}</p>
+          {!isOrder && <p>Total: {numberOfproducts}</p>}
           <div className="articles">
             {items}
           </div>
@@ -50,6 +51,7 @@ AllItems.propTypes = {
   numberOfproducts: PropTypes.number,
   loading: PropTypes.bool,
   isCartItem: PropTypes.bool,
+  isOrder: PropTypes.bool,
 };
 
 export default compose(

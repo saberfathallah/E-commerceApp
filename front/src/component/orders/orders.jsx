@@ -47,7 +47,7 @@ function Orders({
                       content="details"
                       icon="edit"
                       labelPosition="left"
-                      onClick={() => history.push(`/detailsORder/${order._id}`)}
+                      onClick={() => history.push(`/order/${order._id}`)}
                     />
                   </td>
                 </tr>
