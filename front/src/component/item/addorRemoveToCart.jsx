@@ -17,6 +17,7 @@ class AddOrRemoveToCart extends Component {
       maxQuantity,
       price,
       id,
+      user,
     } = this.props;
 
     return (
@@ -45,7 +46,17 @@ class AddOrRemoveToCart extends Component {
             </Button>
           </Button.Group>
           :
-          <button style={styles.add} onClick={() => addProductToCartMutation(id, 1, price)}>
+          <button
+            style={styles.add}
+            onClick={() => {
+              if (user.firstName) {
+                addProductToCartMutation(id, 1, price);
+              } else {
+                alert('you need to connect');
+              }
+            }
+            }
+          >
             <span className="glyphicon glyphicon-plus" aria-hidden="true"></span>
             Add to basket
           </button>
@@ -62,6 +73,7 @@ AddOrRemoveToCart.propTypes = {
   maxQuantity: PropTypes.number,
   cartItemQuantity: PropTypes.number,
   id: PropTypes.string,
+  user: PropTypes.object,
 };
 
 export default compose(

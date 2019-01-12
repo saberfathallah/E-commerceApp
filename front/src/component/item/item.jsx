@@ -50,6 +50,7 @@ class Item extends Component {
           <p style={styles.title}>{description}</p>
           {!isOrder &&
           <AddOrRemoveToCart
+            user={user}
             id={id}
             maxQuantity={quantity}
             cartItemQuantity={cartItemQuantity}
