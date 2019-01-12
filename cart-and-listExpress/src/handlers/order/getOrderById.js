@@ -15,9 +15,12 @@ async function getOrderById(req, res) {
 
   const data = req.params;
   validateSchema(res, data, schema);
-
+  const { userid: userId } = req.headers;
   try {
-    const order = await Order.find({ _id: data.orderId });
+    const order = await Order.findOne({
+      _id: data.orderId,
+      userId,
+    });
     res.status(200).json(order);
   } catch (error) {
     res.status(500).json({ error: error.message });

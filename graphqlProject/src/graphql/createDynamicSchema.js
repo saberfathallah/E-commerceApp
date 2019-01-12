@@ -4,6 +4,7 @@ import * as Category from './category';
 import * as Product from './product';
 import * as Favorite from './favorite';
 import * as Cart from './cart';
+import * as Order from './order';
 
 const features = [
   User,
@@ -11,6 +12,7 @@ const features = [
   Product,
   Favorite,
   Cart,
+  Order,
 ];
 const stringDoers = field => features.reduce((acc, curr) => acc.concat(curr[field] || ''), '');
 
