@@ -13,6 +13,10 @@ import {
   updateQuantityOrRemoveProduct,
 } from './cart';
 
+import {
+  createOrder,
+} from './order';
+
 const favoriteHandlers = {
   addProductToListFavorite,
   getFavoriteList,
@@ -28,7 +32,12 @@ const cartHandlers = {
   updateQuantityOrRemoveProduct,
 };
 
+const orderHandlers = {
+  createOrder,
+};
+
 export {
   favoriteHandlers,
   cartHandlers,
+  orderHandlers,
 };
