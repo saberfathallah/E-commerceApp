@@ -1,4 +1,5 @@
 import Joi from 'joi';
+import Cart from '../../db/models/cart';
 import validateSchema from '../../utils/validateSchema';
 import validateUserId from '../../utils/validateUserId';
 import createOrderService from '../../services/order/createOrderService';
@@ -25,6 +26,7 @@ async function createOrder(req, res) {
   try {
     const { userid: userId } = req.headers;
     const order = await createOrderService(userId, data);
+    await Cart.remove({ userId });
     res.status(200).json({ order });
   } catch (error) {
     res.status(500).json({ error: error.message });

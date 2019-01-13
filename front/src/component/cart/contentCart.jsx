@@ -24,7 +24,7 @@ function ContentCart({
     }));
 
     await createOrderMutation({ total, items, adress: user.adress });
-    history.push('/');
+    history.push('/orders');
   };
 
   if (active === 'cartDetails') {
@@ -53,8 +53,11 @@ function ContentCart({
 
   return (
     <div style={{ width: '100%', textAlign: 'center' }}>
-      <p>Si vous voulez commander cette pannier cliquer sur ACHETER</p>
-      <Button color="green" onClick={() => createOrder()}>ACHETER</Button>
+      {numberOfproducts !== 0 ?
+        <p>Si vous voulez commander cette pannier cliquer sur ACHETER</p> :
+        <p> il faut remplir le pannier pour passer une commande</p>
+      }
+      <Button color="green" disabled={numberOfproducts === 0} onClick={() => createOrder()}>ACHETER</Button>
     </div>
   );
 }

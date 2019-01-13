@@ -11,12 +11,14 @@ import AllItems from '../items';
 function Order({ data, user, orderDetails }) {
   const products = get(data, 'getItemsCurrentCart.items', []);
   const adressUSer = get(orderDetails, 'getOrderById.order.adress', '');
+  const NumCommande = get(orderDetails, 'getOrderById.order._id', '');
   const total = get(orderDetails, 'getOrderById.order.total', 0);
   const loading = get(data, 'loading', []);
   if (loading) return <Icon name="circle notched" loading />;
 
   return (
-    <div>
+    <div style={{ textAlign: 'center' }}>
+      <p>N° commande: {NumCommande}</p>
       <p>adresse de livraison: {adressUSer}</p>
       <p>prix de commande: {total}</p>
       <p>nombre des produits : {products.length}</p>
