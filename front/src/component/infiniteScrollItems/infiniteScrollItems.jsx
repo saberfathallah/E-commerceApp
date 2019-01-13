@@ -47,7 +47,7 @@ class InfiniteScrollItems extends Component {
           pageStart={0}
           loadMore={this.loadItems}
           hasMore={hasMore}
-          loader={<div className="loader" key={0}>loading...</div>}
+          loader={<div className="loader" key={0}><Icon name="circle notched" loading /></div>}
           style={{ textAlign: 'center' }}
         >
           {items.map((product) => (<Item

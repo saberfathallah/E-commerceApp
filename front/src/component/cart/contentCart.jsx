@@ -43,7 +43,7 @@ function ContentCart({
 
   if (active === 'deliveryDetails') {
     return (
-      <div style={{ width: '100%' }}>
+      <div style={{ width: '100%', textAlign: 'center' }}>
         <p>adresse de livraion: {user.adress}</p>
         <p>Total panier: {total}</p>
         <p>Total produits: {numberOfproducts}</p>
