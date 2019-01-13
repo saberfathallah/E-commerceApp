@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { graphql } from 'react-apollo';
 import { get } from 'lodash';
 import getAllProducts from '../../graphql/product/queries/getAllProducts';
-import AllItems from '../items';
+import InfiniteScrollItems from '../infiniteScrollItems';
 
 function Content({
   data, user,
@@ -13,7 +13,7 @@ function Content({
   const loading = get(data, 'loading', true);
 
   return (
-    <AllItems
+    <InfiniteScrollItems
       products={products}
       user={user}
       numberOfproducts={numberOfproducts}
