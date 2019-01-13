@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Button, Image } from 'semantic-ui-react';
 import { compose } from 'react-apollo';
+import { get } from 'lodash';
+import { Button, Image } from 'semantic-ui-react';
 import withAddProductToCartMutation from '../../graphql/cart/addProductToCart/withAddProductToCartMutation';
 import withUpdateQuantityOrRemoveProductMutation from '../../graphql/cart/updateQuantityOrRemoveProduct/withUpdateQuantityOrRemoveProductMutation';
 class AddOrRemoveToCart extends Component {
@@ -49,7 +50,7 @@ class AddOrRemoveToCart extends Component {
           <button
             style={styles.add}
             onClick={() => {
-              if (user.firstName) {
+              if (get(user, 'firstName', '')) {
                 addProductToCartMutation(id, 1, price);
               } else {
                 alert('you need to connect');

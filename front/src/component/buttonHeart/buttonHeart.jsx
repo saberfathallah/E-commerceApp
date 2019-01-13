@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'react-apollo';
+import { get } from 'lodash';
 import { Button, Icon } from 'semantic-ui-react';
 import withAddFavoriteMutation from '../../graphql/favorite/addFavorite/withAddFavoriteMutation';
 import withDeleteFavoriteMutation from '../../graphql/favorite/deleteFavorite/withDeleteFavoriteMutation';
@@ -12,7 +13,7 @@ function AddOrRemoveFavorite({
   productId,
 }) {
   const addorRemove = async () => {
-    if (user.firstName) {
+    if (get(user, 'firstName', '')) {
       if (isFavorite) {
         await deleteFavoriteMutation(productId);
       } else await addFavoriteMutation(productId);
