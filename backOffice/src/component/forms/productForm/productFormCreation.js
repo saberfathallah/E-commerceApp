@@ -46,6 +46,7 @@ const formikHoc = withFormik({
       quantity: Number(values.quantity),
     });
     setSubmitting(false);
+    alert('la création du produit à été effectué avec succés');
   },
   enableReinitialize: true,
 });

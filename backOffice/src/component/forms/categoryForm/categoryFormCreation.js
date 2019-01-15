@@ -36,6 +36,7 @@ const formikHoc = withFormik({
       level: Number(values.level),
     });
     setSubmitting(false);
+    alert('la création de categorie à été effectué avec succés');
   },
   enableReinitialize: true,
 });

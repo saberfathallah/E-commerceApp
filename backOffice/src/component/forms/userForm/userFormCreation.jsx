@@ -44,6 +44,7 @@ const formikHoc = withFormik({
       type: 'admin',
     });
     setSubmitting(false);
+    alert("la création d'utilisateur à été effectué avec succés");
   },
   enableReinitialize: true,
 });

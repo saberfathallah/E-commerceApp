@@ -37,6 +37,7 @@ const formikHoc = withFormik({
       parentId: values.parentId,
     }, props.match.params.id);
     setSubmitting(false);
+    alert('la modification de categorie à été effectué avec succés');
   },
   enableReinitialize: true,
 });

@@ -45,6 +45,7 @@ const formikHoc = withFormik({
       quantity: Number(values.quantity),
     }, props.match.params.id);
     setSubmitting(false);
+    alert('la modification du prroduit à été effectué avec succés');
   },
   enableReinitialize: true,
 });
