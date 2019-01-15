@@ -15,9 +15,13 @@ function Navigation({
     <div className={className}>
       <ul className="menu">
         <li><a href="/">Home</a></li>
-        <li><Link to="/FavoriteList">Favorites</Link></li>
-        <li><Link to="/cart">Panier</Link></li>
-        <li><Link to="/orders">Commandes</Link></li>
+        {user.firstName &&
+          <div style={{ display: 'inline' }}>
+            <li><Link to="/FavoriteList">Favorites</Link></li>
+            <li><Link to="/cart">Panier</Link></li>
+            <li><Link to="/orders">Commandes</Link></li>
+          </div>
+        }
       </ul>
       <div className="right-side">
         {user.firstName ?
