@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Redirect } from 'react-router-dom';
 import { Step } from 'semantic-ui-react';
+import isConnected from '../../utils/isConnected';
 import ContentCart from './contentCart';
 
 class Cart extends Component {
@@ -14,6 +16,10 @@ class Cart extends Component {
   render() {
     const { user, cart } = this.props;
     const { active, step } = this.state;
+
+    if (!isConnected()) {
+      return <Redirect to="/" />;
+    }
 
     return (
       <div style={{ width: '100%' }}>

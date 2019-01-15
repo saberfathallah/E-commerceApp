@@ -1,14 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { graphql } from 'react-apollo';
+import { Redirect } from 'react-router-dom';
 import { get } from 'lodash';
 import FAVORITE_LIST from '../../graphql/favorite/getFavoriteListQuery';
 import AllItems from '../items';
+import isConnected from '../../utils/isConnected';
+
 
 function FavoriteList({
   favortieList, user, loading,
 }) {
   const numberOfproducts = get(favortieList, 'length', 0);
+
+  if (!isConnected()) {
+    return <Redirect to="/" />;
+  }
+
   return (
     <AllItems
       products={favortieList}

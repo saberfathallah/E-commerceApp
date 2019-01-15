@@ -2,11 +2,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { graphql, compose } from 'react-apollo';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Redirect } from 'react-router-dom';
 import { map, get } from 'lodash';
 import { Button, Icon } from 'semantic-ui-react';
 import GET_ALL_ORDERS from '../../graphql/order/getAllOrders';
 import withOrdersWrapper from './withOrdersWrapper';
+import isConnected from '../../utils/isConnected';
 
 function Orders({
   data,
@@ -15,6 +16,10 @@ function Orders({
 }) {
   const orders = get(data, 'getAllOrders.orders', []);
   const loading = get(data, 'loading', true);
+
+  if (!isConnected()) {
+    return <Redirect to="/" />;
+  }
 
   if (loading) return <Icon name="circle notched" loading />;
   return (
