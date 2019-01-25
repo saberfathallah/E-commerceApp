@@ -17,6 +17,7 @@ import {
   createOrder,
   getAllOrders,
   getOrderById,
+  billsEdit,
 } from './order';
 
 const favoriteHandlers = {
@@ -38,6 +39,8 @@ const orderHandlers = {
   createOrder,
   getAllOrders,
   getOrderById,
+  billsEdit,
+  uploadImage,
 };
 
 export {

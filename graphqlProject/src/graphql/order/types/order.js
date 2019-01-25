@@ -32,5 +32,9 @@ type orderResultType  {
   error: String
   order: Order
 }
+
+type billsEditType {
+  base64: String
+}
 `;
 export default [order];
