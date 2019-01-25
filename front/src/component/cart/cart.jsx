@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
 import { Step } from 'semantic-ui-react';
 import isConnected from '../../utils/isConnected';
 import ContentCart from './contentCart';
+import Popup from '../../component/modals/modal';
+import { openPopUp, hidePopup } from './actions';
 
 class Cart extends Component {
   state= {
@@ -14,7 +17,14 @@ class Cart extends Component {
   handleClick(active, step) { this.setState({ active, step }); }
 
   render() {
-    const { user, cart } = this.props;
+    const {
+      user,
+      cart,
+      open,
+      message,
+      hidePopUpFunction,
+      openPopUpFunction,
+    } = this.props;
     const { active, step } = this.state;
 
     if (!isConnected()) {
@@ -23,6 +33,7 @@ class Cart extends Component {
 
     return (
       <div style={{ width: '100%' }}>
+        <Popup open={open} message={message} hidePopUpFunction={() => hidePopUpFunction()} />
         <Step.Group style={{ width: '100%' }} >
           <Step
             active={active === 'cartDetails'}
@@ -53,15 +64,40 @@ class Cart extends Component {
             description="valider mon pannier"
           />
         </Step.Group>
-        <ContentCart user={user} cart={cart} active={active} />
+        <ContentCart
+          user={user}
+          cart={cart}
+          active={active}
+          openPopUpFunction={openPopUpFunction}
+        />
       </div>
     );
   }
 }
 
+function mapStateToProps(state) {
+  return {
+    open: state.cartReducer.isOpen,
+    message: state.cartReducer.message,
+  };
+}
+
+const mapDispatchToProps = (dispatch) => ({
+  openPopUpFunction: (message) => {
+    dispatch(openPopUp(message));
+  },
+  hidePopUpFunction: () => {
+    dispatch(hidePopup());
+  },
+});
+
 Cart.propTypes = {
   user: PropTypes.object,
   cart: PropTypes.object,
+  open: PropTypes.bool,
+  message: PropTypes.string,
+  openPopUpFunction: PropTypes.func,
+  hidePopUpFunction: PropTypes.func,
 };
 
-export default Cart;
+export default connect(mapStateToProps, mapDispatchToProps)(Cart);

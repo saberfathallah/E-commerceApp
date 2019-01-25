@@ -1,0 +1,2 @@
+export const DISPLAY_POPUP_CART = 'DISPLAY_POPUP_CART';
+export const HIDE_POPUP_CART = 'HIDE_POPUP_CART';

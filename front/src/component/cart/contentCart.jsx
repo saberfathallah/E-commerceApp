@@ -9,7 +9,7 @@ import getItemsCurrentCart from '../../graphql/cart/getItemsCurrentCart';
 import withCreateOrderMutation from '../../graphql/order/createOrder/withCreateOrderMutation';
 
 function ContentCart({
-  data, user, active, cart, createOrderMutation, history,
+  data, user, active, cart, createOrderMutation, openPopUpFunction,
 }) {
   const products = get(data, 'getItemsCurrentCart.items', []);
   const loading = get(data, 'loading', true);
@@ -24,7 +24,7 @@ function ContentCart({
     }));
 
     await createOrderMutation({ total, items, adress: user.adress });
-    history.push('/orders');
+    openPopUpFunction('le commande a été passé avec succés');
   };
 
   if (active === 'cartDetails') {
@@ -63,12 +63,12 @@ function ContentCart({
 }
 
 ContentCart.propTypes = {
-  history: PropTypes.object,
   data: PropTypes.object,
   user: PropTypes.object,
   cart: PropTypes.object,
   active: PropTypes.string,
   createOrderMutation: PropTypes.func,
+  openPopUpFunction: PropTypes.func,
 };
 
 export default compose(
@@ -84,5 +84,5 @@ export default compose(
       };
     },
   }),
-  withCreateOrderMutation
+  withCreateOrderMutation,
 )(ContentCart);
