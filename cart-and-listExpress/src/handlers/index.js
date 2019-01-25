@@ -40,7 +40,6 @@ const orderHandlers = {
   getAllOrders,
   getOrderById,
   billsEdit,
-  uploadImage,
 };
 
 export {
