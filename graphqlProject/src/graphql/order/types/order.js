@@ -12,6 +12,12 @@ type itemOrder {
   quantity: Int
 }
 
+type statOrder {
+  id: ID
+  count: Int
+  name: String
+}
+
 input itemOrderInput {
   productId: ID
   quantity: Int

@@ -20,6 +20,7 @@ function Content({ history, user }) {
 }
 Content.propTypes = {
   history: PropTypes.object,
+  user: PropTypes.object,
 };
 
 export default withRouter(Content);

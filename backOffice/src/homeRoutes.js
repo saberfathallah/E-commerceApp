@@ -12,6 +12,7 @@ import ProductFormEdition from './component/forms/productForm/productFormEdition
 import CategoryFormCreation from './component/forms/categoryForm/categoryFormCreation';
 import CategoryFormEdition from './component/forms/categoryForm/categoryFormEdition';
 import UserFormCreation from './component/forms/userForm/userFormCreation';
+import PieChart from './component/statistics/pieChart';
 
 function RoutesHome({ data, loading }) {
   const user = get(data, 'getUserlogged', {});
@@ -23,6 +24,7 @@ function RoutesHome({ data, loading }) {
     <div>
       <Navigation user={user} />
       <Switch>
+        <Route path="/" component={PieChart} exact />
         <Route path="/products" render={() => <Content user={user} />} exact />
         <Route path="/categories" render={() => <Content user={user} />} exact />
         <Route path="/users" render={() => <Content user={user} />} exact />
