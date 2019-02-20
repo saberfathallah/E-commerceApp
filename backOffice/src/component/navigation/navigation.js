@@ -25,6 +25,7 @@ const Navigation = ({
             removeCookie('token', { path: '/home' });
             localStorage.removeItem('token');
             history.push('/signin');
+            window.location.reload();
           }}
           className="logout-btn"
         >
