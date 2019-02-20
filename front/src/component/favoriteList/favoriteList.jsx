@@ -7,7 +7,6 @@ import FAVORITE_LIST from '../../graphql/favorite/getFavoriteListQuery';
 import AllItems from '../items';
 import isConnected from '../../utils/isConnected';
 
-
 function FavoriteList({
   favortieList, user, loading,
 }) {

@@ -17,6 +17,14 @@ app.use(Route.post('/login', userHandlers.login));
 app.use(Route.get('/users', userHandlers.getAllUsers));
 app.use(Route.get('/users/:userId', userHandlers.getUserById));
 app.use(Route.delete('/users', userHandlers.deleteUser));
+app.use(Route.get('/clients', userHandlers.getAllClients));
+app.use(Route.post('/sendInvitation', userHandlers.sendInvitation));
+app.use(Route.get('/getAllInvitation', userHandlers.getAllInvitation));
+app.use(Route.get('/getListOfFriends', userHandlers.getListOfFriends));
+app.use(Route.delete('/annulateInvitation', userHandlers.annulateInvitation));
+app.use(Route.delete('/refuseInvitation', userHandlers.refuseInvitation));
+app.use(Route.post('/acceptInvitation', userHandlers.acceptInvitation));
+app.use(Route.get('/getListOfClientsInvited', userHandlers.getListOfClientsInvited));
 
 app.use(Route.post('/categories', categoryHandlers.addCategory));
 app.use(Route.get('/categories', categoryHandlers.getAllCategories));

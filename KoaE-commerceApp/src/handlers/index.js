@@ -4,6 +4,14 @@ import {
   getAllUsers,
   getUserById,
   deleteUser,
+  getAllClients,
+  sendInvitation,
+  getAllInvitation,
+  getListOfFriends,
+  annulateInvitation,
+  acceptInvitation,
+  refuseInvitation,
+  getListOfClientsInvited,
 } from './User';
 
 import {
@@ -30,6 +38,14 @@ const userHandlers = {
   getAllUsers,
   getUserById,
   deleteUser,
+  getAllClients,
+  sendInvitation,
+  getAllInvitation,
+  getListOfFriends,
+  annulateInvitation,
+  acceptInvitation,
+  refuseInvitation,
+  getListOfClientsInvited,
 };
 
 const categoryHandlers = {

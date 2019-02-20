@@ -11,6 +11,12 @@ type User {
     _id: ID
   }
 
+type Invitation {
+  _id: ID
+  id: ID
+  idInvited: ID
+}
+
   input UserInput {
     firstName: String
     lastName: String
@@ -35,6 +41,11 @@ type User {
   type usersResultType {
     error: String
     users: [User]
+  }
+
+  type usersInvetedResultType {
+    error: String
+    invitations: [Invitation]
   }
 
   type userdeletedType  {
