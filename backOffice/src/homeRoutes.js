@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Route, Switch, withRouter } from 'react-router-dom';
+import { Route, Switch, withRouter, Redirect } from 'react-router-dom';
 import { graphql } from 'react-apollo';
 import { get } from 'lodash';
 import { Icon } from 'semantic-ui-react';
@@ -15,6 +15,9 @@ import UserFormCreation from './component/forms/userForm/userFormCreation';
 
 function RoutesHome({ data, loading }) {
   const user = get(data, 'getUserlogged', {});
+  if (!user.firstName && loading === false) {
+    return <Redirect to="/signin" />;
+  }
   if (loading) return <Icon name="circle notched" loading />;
   return (
     <div>

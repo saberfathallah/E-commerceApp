@@ -51,6 +51,7 @@ const formikHoc = withFormik({
       });
     } else {
       setCookie('token', get(user, 'data.loginUser.token'), { path: '/' });
+      window.location.reload();
       props.history.push('/');
     }
   },
