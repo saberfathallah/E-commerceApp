@@ -51,6 +51,7 @@ const formikHoc = withFormik({
       setCookie('token', get(user, 'data.loginUser.token'), { path: '/' });
       removeCookie('token', { path: '/home' });
       localStorage.setItem('token', get(user, 'data.loginUser.token'));
+      window.location.reload();
       props.history.push('/');
     }
   },
