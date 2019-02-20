@@ -7,7 +7,6 @@ background: #ffffff;
 margin-right: 25px;
 min-height: 350px;
 vertical-align: middle;
-width: calc(100% * (1/4) - 30px);
 margin-bottom: 30px;
 position: relative;
 margin-top: -5px;
