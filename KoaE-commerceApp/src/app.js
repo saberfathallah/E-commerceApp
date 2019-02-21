@@ -39,6 +39,8 @@ app.use(Route.delete('/products', productHandlers.deleteProduct));
 app.use(Route.get('/products/:productId', productHandlers.getProductById));
 app.use(Route.put('/products/:productId', productHandlers.updateProduct));
 app.use(Route.get('/productsByCategory/:categoryId', productHandlers.getProductsByCategoryId));
+app.use(Route.put('/products/topSales/:productId', productHandlers.modifyTopSales));
+app.use(Route.get('/getTopSales', productHandlers.getTopSales));
 
 app.on('error', (err) => {
   console.log(`server error ${err}`);

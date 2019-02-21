@@ -27,6 +27,7 @@ async function addProduct(ctx) {
       image: data.image,
       quantity: data.quantity,
       description: data.description,
+      topSales: 0,
       categoryId: data.categoryId,
     });
     ctx.body = newProduct;

@@ -9,6 +9,7 @@ const product = `
     categoryId: String
     image: String
     _id: ID
+    topSales: Int
   }
 
   input ProductInput {

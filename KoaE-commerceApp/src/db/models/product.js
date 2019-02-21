@@ -7,6 +7,7 @@ let productSchema = new mongoose.Schema({
   quantity: Number,
   image: String,
   description: String,
+  topSales: Number,
   categoryId: { type: mongoose.Schema.Types.ObjectId, ref: 'Category', required: true },
 });
 
