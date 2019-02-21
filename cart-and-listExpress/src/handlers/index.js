@@ -20,6 +20,10 @@ import {
   billsEdit,
 } from './order';
 
+import {
+  topUserCommandes,
+} from './statistics';
+
 const favoriteHandlers = {
   addProductToListFavorite,
   getFavoriteList,
@@ -42,8 +46,13 @@ const orderHandlers = {
   billsEdit,
 };
 
+const statisticsHanlers = {
+  topUserCommandes,
+};
+
 export {
   favoriteHandlers,
   cartHandlers,
   orderHandlers,
+  statisticsHanlers,
 };
