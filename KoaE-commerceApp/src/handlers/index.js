@@ -32,6 +32,7 @@ import {
   getProductsByCategoryId,
   modifyTopSales,
   getTopSales,
+  modifyRatingProduct,
 } from './Product';
 
 const userHandlers = {
@@ -68,6 +69,7 @@ const productHandlers = {
   getProductsByCategoryId,
   modifyTopSales,
   getTopSales,
+  modifyRatingProduct,
 };
 
 export {

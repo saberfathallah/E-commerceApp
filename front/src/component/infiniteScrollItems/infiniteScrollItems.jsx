@@ -58,6 +58,8 @@ class InfiniteScrollItems extends Component {
             description={product.description}
             price={product.price}
             quantity={product.quantity}
+            rate={product.rate}
+            userRateCount={product.userRateCount}
             // eslint-disable-next-line no-underscore-dangle
             id={product._id}
             // eslint-disable-next-line no-underscore-dangle
@@ -81,7 +83,7 @@ export default graphql(FAVORITE_LIST, {
   props: ({ data }) => {
     const list = get(data, 'getFavoriteList.favorites', []);
     // eslint-disable-next-line no-underscore-dangle
-    const productsIds = map(list, (product) => product._id);
+    const productsIds = map(list, (product) => get(product, '_id', ''));
 
     return ({
       favortieList: productsIds,

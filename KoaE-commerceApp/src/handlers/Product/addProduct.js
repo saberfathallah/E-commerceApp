@@ -28,6 +28,8 @@ async function addProduct(ctx) {
       quantity: data.quantity,
       description: data.description,
       topSales: 0,
+      rate: 0,
+      userRateCount: 0,
       categoryId: data.categoryId,
     });
     ctx.body = newProduct;

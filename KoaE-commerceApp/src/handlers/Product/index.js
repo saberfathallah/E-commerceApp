@@ -6,3 +6,4 @@ export { default as updateProduct } from './updateProduct';
 export { default as getProductsByCategoryId } from './getProductsByCategoryId';
 export { default as modifyTopSales } from './modifyTopSales';
 export { default as getTopSales } from './getTopSales';
+export { default as modifyRatingProduct } from './modifyRatingProduct';

@@ -9,6 +9,8 @@ query getProductByIdCategory($id: ID!) {
       price
       quantity
       image
+      rate
+      userRateCount
       _id
     }
     error

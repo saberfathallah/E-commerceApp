@@ -4,11 +4,13 @@ import addProduct from '../services/addProduct';
 import updateProduct from '../services/updateProduct';
 import deleteProduct from '../services/deleteProduct';
 import { isAuthenticated } from '../../../utils/authorization';
+import modifyRatingProduct from '../services/modifyRatingProduct';
 
 export const productMutations = `
   addProduct(input: ProductInput): productResultType
   updateProduct(input: ProductInput, id: ID!): productResultType
   deleteProduct(id: ID!): productDeletedType  
+  modifyRatingProduct(id: ID!, rate: Int): productResultType  
 `;
 
 export const Resolvers = {
@@ -30,6 +32,13 @@ export const Resolvers = {
     isAuthenticated,
     async (_, { input, id }, { user }) => {
       const result = await updateProduct(input, id, user._id);
+      return result;
+    },
+  ),
+  modifyRatingProduct: combineResolvers(
+    isAuthenticated,
+    async (_, { id, rate }) => {
+      const result = await modifyRatingProduct(rate, id);
       return result;
     },
   ),

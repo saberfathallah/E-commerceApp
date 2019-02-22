@@ -10,6 +10,8 @@ const product = `
     image: String
     _id: ID
     topSales: Int
+    userRateCount: Int
+    rate: Float
   }
 
   input ProductInput {

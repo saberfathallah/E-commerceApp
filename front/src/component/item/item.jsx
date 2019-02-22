@@ -7,6 +7,8 @@ import AddOrRemoveToCart from './addorRemoveToCart';
 import RemoveProductFromCart from './removeProductFromCart';
 import WrapperItem from './itemWrapper';
 import currentCart from '../../graphql/cart/currentCart';
+import RatingProduct from '../rating';
+
 class Item extends Component {
   shouldComponentUpdate(nextProps) {
     const isFavorite = includes(this.props.favortieList, this.props.id);
@@ -32,6 +34,8 @@ class Item extends Component {
       cartItemQuantity,
       isCartItem,
       isOrder,
+      rate,
+      userRateCount,
     } = this.props;
     const isFavorite = includes(favortieList, id);
 
@@ -42,12 +46,14 @@ class Item extends Component {
         <div style={styles.card}>
           <img
             src={img}
-            style={{ width: '100%', height: 250 }}
+            style={{ width: '100%', height: 200 }}
             alt=""
           />
           <h3>{title}</h3>
           <h3>{price} {'$'}</h3>
           <p style={styles.title}>{description}</p>
+          <RatingProduct id={id} rate={rate} />
+          <p style={{ fontSize: '7px', float: 'right' }}>{userRateCount} personnes</p>
           {!isOrder &&
           <AddOrRemoveToCart
             user={user}
@@ -75,6 +81,8 @@ Item.propTypes = {
   isCartItem: PropTypes.bool,
   isOrder: PropTypes.bool,
   cartItemQuantity: PropTypes.number,
+  rate: PropTypes.number,
+  userRateCount: PropTypes.number,
 };
 
 export default compose(

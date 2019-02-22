@@ -8,12 +8,14 @@ let productSchema = new mongoose.Schema({
   image: String,
   description: String,
   topSales: Number,
+  rate: Number,
+  userRateCount: Number,
   categoryId: { type: mongoose.Schema.Types.ObjectId, ref: 'Category', required: true },
 });
 
 productSchema.toJSON = function () {
   return {
-     /* eslint-disable no-underscore-dangle */
+    /* eslint-disable no-underscore-dangle */
     id: this._id,
     name: this.name,
     brand: this.brand,

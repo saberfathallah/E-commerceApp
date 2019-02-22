@@ -65,7 +65,7 @@ Navigation.propTypes = {
   history: PropTypes.object,
   user: PropTypes.object,
   cart: PropTypes.object,
-  usersInvitations: PropTypes.object,
+  usersInvitations: PropTypes.array,
 };
 
 export default compose(

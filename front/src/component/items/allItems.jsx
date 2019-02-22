@@ -23,6 +23,8 @@ function AllItems({
       description={product.description}
       price={product.price}
       quantity={product.quantity}
+      rate={product.rate}
+      userRateCount={product.userRateCount}
       // eslint-disable-next-line no-underscore-dangle
       id={product._id}
     />));
