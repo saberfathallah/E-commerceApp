@@ -2,13 +2,13 @@ import React from 'react';
 import { withFormik } from 'formik';
 import PropTypes from 'prop-types';
 import { compose } from 'react-apollo';
-import { Form, Container, Button, Input } from 'semantic-ui-react';
+import { Form, Container, Button, Input, Label } from 'semantic-ui-react';
 import { withRouter } from 'react-router-dom';
 
-import ErrorMessage from '../../utils/errorMessage';
 import validatorsFunctions, { validateObject } from '../../utils/validator';
 import withRegistreUserMutation from '../../graphql/register/withRegistreUserMutation';
 import withRegisterUserWrapper from './registerWrapper';
+import UserPassword from './passwordForm';
 
 function createObjectForValidate() {
   const validate = Object.assign({}, {
@@ -17,7 +17,7 @@ function createObjectForValidate() {
     firstName: [validatorsFunctions.isRequire],
     lastName: [validatorsFunctions.isRequire],
     adress: [validatorsFunctions.isRequire],
-    password: [validatorsFunctions.isRequire],
+    password: [validatorsFunctions.isRequire, validatorsFunctions.validPassword],
   });
   return validate;
 }
@@ -66,12 +66,12 @@ Register.propTypes = {
 };
 
 function Register(props) {
+  console.log('TCLsssssssssssssssssssssssssssssssss: Register -> props', props);
   const isBadFirstName = !!(props.touched.firstName && props.errors.firstName);
   const isBadLastName = !!(props.touched.lastName && props.errors.lastName);
   const isBadAge = !!(props.touched.age && props.errors.age);
   const isBadAdress = !!(props.touched.adress && props.errors.adress);
   const isBadMail = !!(props.touched.mail && props.errors.mail);
-  const isBadPassword = !!(props.touched.password && props.errors.password);
 
   return (
     <div className={props.className}>
@@ -88,7 +88,7 @@ function Register(props) {
             name="firstName"
             error={isBadFirstName}
           />
-          {isBadFirstName && <ErrorMessage error={props.errors.firstName} />}
+          {isBadFirstName && <Label basic color="red" pointing ><p>{props.errors.firstName}</p></Label>}
         </Form.Field>
         <Form.Field>
           <Input
@@ -101,7 +101,7 @@ function Register(props) {
             name="lastName"
             error={isBadLastName}
           />
-          {isBadLastName && <ErrorMessage error={props.errors.lastName} />}
+          {isBadLastName && <Label basic color="red" pointing ><p>{props.errors.lastName}</p></Label>}
         </Form.Field>
         <Form.Field>
           <Input
@@ -114,8 +114,8 @@ function Register(props) {
             name="age"
             error={isBadAge}
           />
-          {isBadAge && <ErrorMessage error={props.errors.age} />}
         </Form.Field>
+        {isBadAge && <Label basic color="red" pointing ><p>{props.errors.age}</p></Label>}
         <Form.Field>
           <Input
             placeholder="*adress"
@@ -127,7 +127,7 @@ function Register(props) {
             name="adress"
             error={isBadAdress}
           />
-          {isBadAdress && <ErrorMessage error={props.errors.adress} />}
+          {isBadAge && <Label basic color="red" pointing ><p>{props.errors.adress}</p></Label>}
         </Form.Field>
         <Form.Field>
           <Input
@@ -140,20 +140,15 @@ function Register(props) {
             name="mail"
             error={isBadMail}
           />
-          {isBadMail && <ErrorMessage error={props.errors.mail} />}
+          {isBadMail && <Label basic color="red" pointing ><p>{props.errors.mail}</p></Label>}
         </Form.Field>
-        <Form.Field>
-          <Input
-            placeholder="*password"
-            maxLength="80"
-            value={props.values.password}
-            onChange={props.handleChange}
-            onBlur={props.handleBlur}
-            name="password"
-            error={isBadPassword}
-          />
-          {isBadPassword && <ErrorMessage error={props.errors.password} />}
-        </Form.Field>
+        <UserPassword
+          handleChange={props.handleChange}
+          handleBlur={props.handleBlur}
+          values={props.values}
+          errors={props.errors}
+          touched={props.touched}
+        />
         <Container className="submit-container">
           <Button primary type="submit">inscription</Button>
         </Container>
