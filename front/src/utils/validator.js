@@ -6,6 +6,7 @@ export const validateMessages = {
   required: {
     mail: `${GENERIC_THANKS} votre adresse E-mail`,
     password: `${GENERIC_THANKS} votre mot de passe.`,
+    passwordConfirmation: `${GENERIC_THANKS} votre mot de passe.`,
     firstName: `${GENERIC_THANKS} votre prénon.`,
     lastName: `${GENERIC_THANKS} votre non.`,
     adress: `${GENERIC_THANKS} votre adresse.`,
@@ -21,6 +22,7 @@ export const validateMessages = {
   },
   validEmail: 'Le format de votre adresse Email est incorrect. Merci de recommencer.',
   validPassword: 'Votre mot de passe doit comporter 8 caractères minimum, avec au moins 1 lettre, 1 chiffre et 1 caractère spécial (?!:;,&*-/+#$...)',
+  validOptionPass: 'Vos deux mots de passe ne sont pas identiques. Merci de recommencer.',
 };
 
 export const validateFunctions = {
@@ -43,6 +45,12 @@ export const validateFunctions = {
     message: () => ('Nombre'),
   },
 };
+
+export const passwordConfirm = (values) => ({
+  passed: (currentValue) => values.password === currentValue,
+  message: () => (validateMessages.validOptionPass),
+}
+);
 
 export const validateObject = (valuesToTest, funcs, options = {}) => {
   const errors = {};

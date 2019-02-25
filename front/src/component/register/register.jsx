@@ -5,12 +5,12 @@ import { compose } from 'react-apollo';
 import { Form, Container, Button, Input, Label } from 'semantic-ui-react';
 import { withRouter } from 'react-router-dom';
 
-import validatorsFunctions, { validateObject } from '../../utils/validator';
+import validatorsFunctions, { validateObject, passwordConfirm } from '../../utils/validator';
 import withRegistreUserMutation from '../../graphql/register/withRegistreUserMutation';
 import withRegisterUserWrapper from './registerWrapper';
 import UserPassword from './passwordForm';
 
-function createObjectForValidate() {
+function createObjectForValidate(values) {
   const validate = Object.assign({}, {
     age: [validatorsFunctions.isRequire, validatorsFunctions.hasNumber],
     mail: [validatorsFunctions.isRequire, validatorsFunctions.validEmail],
@@ -18,6 +18,7 @@ function createObjectForValidate() {
     lastName: [validatorsFunctions.isRequire],
     adress: [validatorsFunctions.isRequire],
     password: [validatorsFunctions.isRequire, validatorsFunctions.validPassword],
+    passwordConfirmation: [validatorsFunctions.isRequire, passwordConfirm(values)],
   });
   return validate;
 }
@@ -33,12 +34,16 @@ const formikHoc = withFormik({
       password: '',
     }), // initialisation values
   validate: (values) => { // validation form
-    const firstErrors = validateObject(values, createObjectForValidate());
+    const firstErrors = validateObject(values, createObjectForValidate(values));
     return Object.assign({}, firstErrors);
   },
   handleSubmit: async (values, { props, setSubmitting }) => {
     await props.registreUser({
-      ...values,
+      firstName: values.firstName,
+      lastName: values.lastName,
+      password: values.password,
+      adress: values.adress,
+      mail: values.mail,
       age: Number(values.age),
       type: 'client',
     });
@@ -66,7 +71,6 @@ Register.propTypes = {
 };
 
 function Register(props) {
-  console.log('TCLsssssssssssssssssssssssssssssssss: Register -> props', props);
   const isBadFirstName = !!(props.touched.firstName && props.errors.firstName);
   const isBadLastName = !!(props.touched.lastName && props.errors.lastName);
   const isBadAge = !!(props.touched.age && props.errors.age);

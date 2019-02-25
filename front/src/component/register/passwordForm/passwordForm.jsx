@@ -15,6 +15,7 @@ export default function UserPassword(props) {
   } = props;
 
   const isBadPassword = !!(touched.password && errors.password);
+  const isBadPasswordConfirmation = !!(touched.passwordConfirmation && errors.passwordConfirmation);
 
   return (
     <div className={className}>
@@ -35,6 +36,25 @@ export default function UserPassword(props) {
             <Label basic color="red" pointing >
               <p>{errors.password}</p>
             </Label>
+        }
+      </Form.Field>
+      <Form.Field>
+        <Input
+          name="passwordConfirmation"
+          type="password"
+          value={values.passwordConfirmation}
+          onChange={handleChange}
+          placeholder="Confirmation du mot de passe"
+          maxLength="80"
+          setRefs={setRefs}
+          autoComplete="passwordConfirmation"
+          onBlur={handleBlur}
+        />
+        {
+          isBadPasswordConfirmation &&
+          <Label basic color="red" pointing >
+            <p>{errors.passwordConfirmation}</p>
+          </Label>
         }
       </Form.Field>
       <UserPasswordSecurityBlock password={values.password} />
