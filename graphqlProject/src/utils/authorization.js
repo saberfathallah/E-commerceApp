@@ -2,7 +2,6 @@ import { skip, combineResolvers } from 'graphql-resolvers';
 import jwt from 'jsonwebtoken';
 
 const SECRET_APP = 'secret token';
-const SESSION_TIME = 720;
 
 export const isAuthenticated = (_, $, { user }) => (user ? skip : { error: 'error authentification' });
 
@@ -16,7 +15,7 @@ export const isAdmin = combineResolvers(
 export function generateToken(userId) {
   return jwt.sign({
     userid: userId,
-  }, SECRET_APP, { expiresIn: Math.floor(Date.now() / 1000) + SESSION_TIME });
+  }, SECRET_APP, { expiresIn: '1h' });
 }
 
 export function verifyToken(token) {
