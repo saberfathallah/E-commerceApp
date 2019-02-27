@@ -28,7 +28,7 @@ function HeaderContent({
 
 HeaderContent.propTypes = {
   history: PropTypes.object,
-  className: PropTypes.object,
+  className: PropTypes.string,
   length: PropTypes.number,
   type: PropTypes.string,
 };

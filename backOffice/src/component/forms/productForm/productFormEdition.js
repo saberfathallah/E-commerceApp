@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react';
 import { withFormik } from 'formik';
@@ -39,11 +40,17 @@ const formikHoc = withFormik({
     return Object.assign({}, firstErrors);
   },
   handleSubmit: async (values, { props, setSubmitting }) => {
+    const startDatePromotion = props.startDate._d.getTime();
+    console.log('TCL: startDatePromotion', startDatePromotion);
+    const endDatePromotion = props.endDate._d.getTime();
+    console.log('TCL: endDatePromotion', endDatePromotion);
     await props.updateProductMutation({
       ...values,
       price: Number(values.price),
       quantity: Number(values.quantity),
-    }, props.match.params.id);
+      endDatePromotion,
+      startDatePromotion,
+    }, props.idProduct);
     setSubmitting(false);
     alert('la modification du prroduit à été effectué avec succés');
   },
@@ -55,7 +62,7 @@ compose(
   graphql(GET_PRODUCT_BY_ID, {
     options: (props) => ({
       variables: {
-        id: props.match.params.id,
+        id: props.idProduct,
       },
     }),
   }),

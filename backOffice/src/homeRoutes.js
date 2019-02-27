@@ -7,7 +7,7 @@ import Navigation from './component/navigation';
 import Content from './component/content';
 import USER_LOGGED from './graphql/user/getUserLogged';
 import ProductFormCreation from './component/forms/productForm/productFormCreation';
-import ProductFormEdition from './component/forms/productForm/productFormEdition';
+import ContainerProductFormEdition from './component/forms/productForm/containerProductFromEdition';
 import CategoryFormCreation from './component/forms/categoryForm/categoryFormCreation';
 import CategoryFormEdition from './component/forms/categoryForm/categoryFormEdition';
 import UserFormCreation from './component/forms/userForm/userFormCreation';
@@ -30,7 +30,7 @@ function RoutesHome({ data }) {
         <Route path="/categories" render={() => <Content user={user} />} exact />
         <Route path="/users" render={() => <Content user={user} />} exact />
         <Route path="/addProduct" component={ProductFormCreation} exact />
-        <Route path="/editProduct/:id" component={withRouter(ProductFormEdition)} exact />
+        <Route path="/editProduct/:id" component={withRouter(ContainerProductFormEdition)} exact />
         <Route path="/addCategory" component={CategoryFormCreation} exact />
         <Route path="/editCategory/:id" component={withRouter(CategoryFormEdition)} exact />
         <Route path="/addUser" component={UserFormCreation} exact />

@@ -11,6 +11,8 @@ let productSchema = new mongoose.Schema({
   rate: Number,
   userRateCount: Number,
   categoryId: { type: mongoose.Schema.Types.ObjectId, ref: 'Category', required: true },
+  startDatePromotion: Number,
+  endDatePromotion: Number,
 });
 
 productSchema.toJSON = function () {

@@ -12,6 +12,8 @@ const product = `
     topSales: Int
     userRateCount: Int
     rate: Float
+    startDatePromotion: String
+    endDatePromotion: String
   }
 
   input ProductInput {
@@ -22,6 +24,8 @@ const product = `
     description: String
     categoryId: String
     image: String
+    startDatePromotion: Float
+    endDatePromotion: Float
   }
 
   type productResultType {
