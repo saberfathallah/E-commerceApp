@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { Route, Switch, withRouter, Redirect } from 'react-router-dom';
 import { graphql } from 'react-apollo';
 import { get } from 'lodash';
-import { Icon } from 'semantic-ui-react';
 import Navigation from './component/navigation';
 import Content from './component/content';
 import USER_LOGGED from './graphql/user/getUserLogged';
@@ -13,13 +12,15 @@ import CategoryFormCreation from './component/forms/categoryForm/categoryFormCre
 import CategoryFormEdition from './component/forms/categoryForm/categoryFormEdition';
 import UserFormCreation from './component/forms/userForm/userFormCreation';
 import PieChart from './component/statistics/pieChart';
+import { getCookie } from './utils/cookiesStore';
 
-function RoutesHome({ data, loading }) {
+function RoutesHome({ data }) {
   const user = get(data, 'getUserlogged', {});
-  if (!user.firstName && loading === false) {
+  const token = getCookie('token');
+
+  if (!token) {
     return <Redirect to="/signin" />;
   }
-  if (loading) return <Icon name="circle notched" loading />;
   return (
     <div>
       <Navigation user={user} />
@@ -39,7 +40,6 @@ function RoutesHome({ data, loading }) {
 }
 RoutesHome.propTypes = {
   data: PropTypes.object,
-  loading: PropTypes.bool,
 };
 
 export default graphql(USER_LOGGED)(RoutesHome);
