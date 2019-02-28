@@ -29,8 +29,8 @@ const formikHoc = withFormik({
   mapPropsToValues: (props) => ({
     name: get(props, 'data.getProductById.product.name', ''),
     brand: get(props, 'data.getProductById.product.brand', ''),
-    price: get(props, 'data.getProductById.product.price', ''),
-    quantity: get(props, 'data.getProductById.product.quantity', ''),
+    price: get(props, 'data.getProductById.product.price', 0),
+    quantity: get(props, 'data.getProductById.product.quantity', 0),
     description: get(props, 'data.getProductById.product.description', ''),
     image: get(props, 'data.getProductById.product.image', ''),
     categoryId: get(props, 'data.getProductById.product.categoryId', ''),
@@ -41,15 +41,17 @@ const formikHoc = withFormik({
   },
   handleSubmit: async (values, { props, setSubmitting }) => {
     const startDatePromotion = props.startDate._d.getTime();
-    console.log('TCL: startDatePromotion', startDatePromotion);
     const endDatePromotion = props.endDate._d.getTime();
-    console.log('TCL: endDatePromotion', endDatePromotion);
+    const promotions = {
+      startDatePromotion, endDatePromotion, label: '-10%', value: '10', typePromo: 'percentage',
+    };
+    console.log('ddd', typeof promotions);
     await props.updateProductMutation({
       ...values,
       price: Number(values.price),
       quantity: Number(values.quantity),
-      endDatePromotion,
-      startDatePromotion,
+      promotions,
+      isPromo: props.isPromo,
     }, props.idProduct);
     setSubmitting(false);
     alert('la modification du prroduit à été effectué avec succés');

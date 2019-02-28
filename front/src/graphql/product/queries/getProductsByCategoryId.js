@@ -12,6 +12,13 @@ query getProductByIdCategory($id: ID!) {
       rate
       userRateCount
       _id
+      isPromo
+      promotions {
+        startDatePromotion
+        endDatePromotion
+        value
+        label
+      }
     }
     error
   }

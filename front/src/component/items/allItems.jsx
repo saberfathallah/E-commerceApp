@@ -27,6 +27,8 @@ function AllItems({
       userRateCount={product.userRateCount}
       // eslint-disable-next-line no-underscore-dangle
       id={product._id}
+      isPromo={product.isPromo}
+      promotions={product.promotions}
     />));
 
   return (

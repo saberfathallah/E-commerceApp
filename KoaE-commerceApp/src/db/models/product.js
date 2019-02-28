@@ -1,5 +1,13 @@
 import mongoose from 'mongoose';
 
+const promotionsType = {
+  type: String,
+  startDatePromotion: Number,
+  endDatePromotion: Number,
+  value: String,
+  label: String,
+};
+
 let productSchema = new mongoose.Schema({
   name: String,
   brand: String,
@@ -11,8 +19,14 @@ let productSchema = new mongoose.Schema({
   rate: Number,
   userRateCount: Number,
   categoryId: { type: mongoose.Schema.Types.ObjectId, ref: 'Category', required: true },
-  startDatePromotion: Number,
-  endDatePromotion: Number,
+  promotions: {
+    typePromo: String,
+    startDatePromotion: Number,
+    endDatePromotion: Number,
+    value: String,
+    label: String,
+  },
+  isPromo: Boolean,
 });
 
 productSchema.toJSON = function () {
@@ -26,6 +40,7 @@ productSchema.toJSON = function () {
     image: this.image,
     description: this.description,
     categoryId: this.categoryId,
+    promotions: this.promotions,
   };
 };
 

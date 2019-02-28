@@ -34,12 +34,14 @@ class ProductForm extends Component {
       handleChange,
       handleBlur,
       errors,
+      addPromotion,
+      isPromo,
     } = this.props;
 
     return (
       <div className={className}>
         <h1>formulaire produit</h1>
-        <Form onSubmit={handleSubmit} className="form">
+        <Form className="form">
           <Form.Field>
             <Input
               placeholder="*name"
@@ -135,6 +137,8 @@ class ProductForm extends Component {
           {formType === 'edition' &&
           <div>
             <p>Promotions</p>
+            <button onClick={() => addPromotion()}>ajouter Promotion</button>
+            {isPromo &&
             <div style={{ display: 'flex', textAlign: 'center' }}>
               <PickerDate
                 begin
@@ -147,10 +151,11 @@ class ProductForm extends Component {
                 handleChangeEndDate={handleChangeEndDate}
               />
             </div>
+            }
           </div>
           }
           <Container className="submit-container">
-            <Button primary type="submit">{formType === 'edition' ? 'Edit product' : 'add product '}</Button>
+            <Button primary onClick={() => handleSubmit()}>{formType === 'edition' ? 'Edit product' : 'add product '}</Button>
           </Container>
         </Form>
       </div>
@@ -162,8 +167,8 @@ ProductForm.propTypes = {
   values: PropTypes.shape({
     name: PropTypes.string,
     brand: PropTypes.string,
-    price: PropTypes.string,
-    quantity: PropTypes.string,
+    price: PropTypes.number,
+    quantity: PropTypes.number,
     description: PropTypes.string,
     image: PropTypes.string,
     categoryId: PropTypes.string,
@@ -171,8 +176,10 @@ ProductForm.propTypes = {
   handleChange: PropTypes.func,
   handleChangeStartDate: PropTypes.func,
   handleChangeEndDate: PropTypes.func,
+  addPromotion: PropTypes.func,
   startDate: PropTypes.object,
   endDate: PropTypes.object,
+  isPromo: PropTypes.bool,
   handleBlur: PropTypes.func,
   handleSubmit: PropTypes.func,
   errors: PropTypes.object,

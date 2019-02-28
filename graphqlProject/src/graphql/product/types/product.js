@@ -1,5 +1,22 @@
 
 const product = `
+
+  type promotionsType {
+    typePromo: String
+    startDatePromotion: Float
+    endDatePromotion: Float
+    value: String
+    label: String
+  }
+
+  input inputPromotionsType {
+    typePromo: String
+    startDatePromotion: Float
+    endDatePromotion: Float
+    value: String
+    label: String
+  }
+
   type Product {
     name: String
     brand: String
@@ -12,8 +29,8 @@ const product = `
     topSales: Int
     userRateCount: Int
     rate: Float
-    startDatePromotion: String
-    endDatePromotion: String
+    promotions: promotionsType
+    isPromo: Boolean
   }
 
   input ProductInput {
@@ -24,8 +41,8 @@ const product = `
     description: String
     categoryId: String
     image: String
-    startDatePromotion: Float
-    endDatePromotion: Float
+    promotions: inputPromotionsType
+    isPromo: Boolean
   }
 
   type productResultType {

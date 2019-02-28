@@ -1,7 +1,9 @@
+/* eslint-disable jsx-a11y/alt-text */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { graphql, compose } from 'react-apollo';
 import { includes, find, get } from 'lodash';
+import format from 'date-fns/format';
 import AddOrRemoveFavorite from '../buttonHeart';
 import AddOrRemoveToCart from './addorRemoveToCart';
 import RemoveProductFromCart from './removeProductFromCart';
@@ -36,6 +38,8 @@ class Item extends Component {
       isOrder,
       rate,
       userRateCount,
+      isPromo,
+      promotions,
     } = this.props;
     const isFavorite = includes(favortieList, id);
 
@@ -50,8 +54,25 @@ class Item extends Component {
             alt=""
           />
           <h3>{title}</h3>
-          <h3>{price} {'$'}</h3>
+          <div className="item__price-tag">
+            <p className="item__price-line-through">
+              {price} {'$'}
+            </p>
+            <p>{price / 2 } {'$'}</p>
+          </div>
           <p style={styles.title}>{description}</p>
+          <div style={{ height: '32px' }}>
+            {isPromo &&
+            <div>
+              <img className="item_img-promo" src="../asset/Label-offre-ic@2x.png" />
+              <p style={{ float: 'left' }}>{promotions.label}</p>
+              <div style={{ fontSize: '8px' }}>
+                <p>{`de ${format(new Date(Number(promotions.startDatePromotion)), 'DD/MM/YYYY')}`}</p>
+                <p>{`jusqu'a ${format(new Date(Number(promotions.endDatePromotion)), 'DD/MM/YYYY')}`}</p>
+              </div>
+            </div>
+            }
+          </div>
           <RatingProduct id={id} rate={rate} />
           <p style={{ fontSize: '7px', float: 'right' }}>{userRateCount} personnes</p>
           {!isOrder &&
@@ -83,6 +104,8 @@ Item.propTypes = {
   cartItemQuantity: PropTypes.number,
   rate: PropTypes.number,
   userRateCount: PropTypes.number,
+  isPromo: PropTypes.bool,
+  promotions: PropTypes.object,
 };
 
 export default compose(

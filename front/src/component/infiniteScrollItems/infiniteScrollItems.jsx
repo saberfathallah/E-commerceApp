@@ -60,6 +60,8 @@ class InfiniteScrollItems extends Component {
             quantity={product.quantity}
             rate={product.rate}
             userRateCount={product.userRateCount}
+            isPromo={product.isPromo}
+            promotions={product.promotions}
             // eslint-disable-next-line no-underscore-dangle
             id={product._id}
             // eslint-disable-next-line no-underscore-dangle

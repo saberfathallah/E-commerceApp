@@ -11,8 +11,14 @@ const schema = Joi.object().keys({
   image: Joi.string(),
   description: Joi.string(),
   categoryId: Joi.string(),
-  startDatePromotion: Joi.number(),
-  endDatePromotion: Joi.number(),
+  promotions: Joi.object({
+    typePromo: Joi.string(),
+    value: Joi.string(),
+    label: Joi.string(),
+    startDatePromotion: Joi.number(),
+    endDatePromotion: Joi.number(),
+  }),
+  isPromo: Joi.boolean(),
 });
 
 async function updateProduct(ctx, productId) {
