@@ -23,5 +23,17 @@ margin-top: -5px;
   }
 }
 
+.item-promotion {
+  height: 32px;
+}
+
+.item-promotion-label {
+  float: left;
+}
+
+.item-promotion-date {
+  font-size: 8px;
+}
+
 `;
 

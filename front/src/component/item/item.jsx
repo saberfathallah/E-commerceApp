@@ -61,12 +61,12 @@ class Item extends Component {
             <p>{price / 2 } {'$'}</p>
           </div>
           <p style={styles.title}>{description}</p>
-          <div style={{ height: '32px' }}>
+          <div className="item-promotion">
             {isPromo &&
             <div>
               <img className="item_img-promo" src="../asset/Label-offre-ic@2x.png" />
               <p style={{ float: 'left' }}>{promotions.label}</p>
-              <div style={{ fontSize: '8px' }}>
+              <div className="item-promotion-date">
                 <p>{`de ${format(new Date(Number(promotions.startDatePromotion)), 'DD/MM/YYYY')}`}</p>
                 <p>{`jusqu'a ${format(new Date(Number(promotions.endDatePromotion)), 'DD/MM/YYYY')}`}</p>
               </div>
