@@ -5,6 +5,7 @@ export default gql`
     currentCart {
       cart {
         total
+        totalWithPromotion
         items {
           productId
           quantity

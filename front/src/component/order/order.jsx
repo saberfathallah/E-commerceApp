@@ -16,6 +16,7 @@ function Order({
   const adressUSer = get(orderDetails, 'getOrderById.order.adress', '');
   const NumCommande = get(orderDetails, 'getOrderById.order._id', '');
   const total = get(orderDetails, 'getOrderById.order.total', 0);
+  const totalWithPromotion = get(orderDetails, 'getOrderById.order.totalWithPromotion', 0);
   const loading = get(data, 'loading', []);
   if (loading) return <Icon name="circle notched" loading />;
 
@@ -30,6 +31,7 @@ function Order({
       <p>N° commande: {NumCommande}</p>
       <p>adresse de livraison: {adressUSer}</p>
       <p>prix de commande: {total}</p>
+      <p>prix de commande avec réduction: {totalWithPromotion}</p>
       <p>nombre des produits : {products.length}</p>
       <AllItems
         isOrder

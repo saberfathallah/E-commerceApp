@@ -43,6 +43,7 @@ class Item extends Component {
       promotions,
     } = this.props;
     const isFavorite = includes(favortieList, id);
+    const promotionPrice = isPromo ? getPromotionPrice(price, promotions.value) : 0;
 
     return (
       <div className={className}>
@@ -61,7 +62,7 @@ class Item extends Component {
                 <p className="item__price-line-through">
                   {price} {'$'}
                 </p>
-                <p>{price - getPromotionPrice(price, promotions.value)} {'$'}</p>
+                <p>{price - promotionPrice} {'$'}</p>
               </div>
               :
               <p>
@@ -91,6 +92,8 @@ class Item extends Component {
             maxQuantity={quantity}
             cartItemQuantity={cartItemQuantity}
             price={price}
+            isPromo={isPromo}
+            promotionPrice={promotionPrice}
           />
           }
         </div>

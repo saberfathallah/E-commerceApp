@@ -14,7 +14,9 @@ const schema = Joi.object().keys({
 async function addProductToCart(req, res) {
   validateUserId(req, res);
   const data = req.body;
-  validateSchema(res, data, schema);
+  validateSchema(res, {
+    productId: data.productId, quantity: data.quantity, price: data.price,
+  }, schema);
   try {
     const { userid: userId } = req.headers;
     const cart = await addProduct(userId, data);

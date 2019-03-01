@@ -19,6 +19,8 @@ class AddOrRemoveToCart extends Component {
       price,
       id,
       user,
+      isPromo,
+      promotionPrice,
     } = this.props;
 
     return (
@@ -41,7 +43,8 @@ class AddOrRemoveToCart extends Component {
               basic
               color="green"
               size="small"
-              onClick={() => addProductToCartMutation(id, 1, price)}
+              onClick={() =>
+                addProductToCartMutation(id, 1, price, isPromo, price - promotionPrice)}
             >
               <Image name="plus" src="../asset/btn-plus_2x.png" />
             </Button>
@@ -51,7 +54,7 @@ class AddOrRemoveToCart extends Component {
             style={styles.add}
             onClick={() => {
               if (get(user, 'firstName', '')) {
-                addProductToCartMutation(id, 1, price);
+                addProductToCartMutation(id, 1, price, isPromo, price - promotionPrice);
               } else {
                 alert('you need to connect');
               }
@@ -75,6 +78,8 @@ AddOrRemoveToCart.propTypes = {
   cartItemQuantity: PropTypes.number,
   id: PropTypes.string,
   user: PropTypes.object,
+  isPromo: PropTypes.bool,
+  promotionPrice: PropTypes.number,
 };
 
 export default compose(

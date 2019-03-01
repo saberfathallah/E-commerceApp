@@ -7,6 +7,7 @@ query getOrderById($orderId: ID!) {
       _id
       adress
       total
+      totalWithPromotion
       items {
         productId
         quantity

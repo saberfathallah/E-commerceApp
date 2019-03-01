@@ -15,13 +15,15 @@ const arraySchema = Joi.array().items(objectSchema).min(1).required();
 
 const schema = Joi.object().keys({
   adress: Joi.string(),
-  total: Joi.number().strict().integer().required(),
+  total: Joi.number().strict().required(),
+  totalWithPromotion: Joi.number().strict().required(),
   items: Joi.alternatives().try(objectSchema, arraySchema),
 });
 
 async function createOrder(req, res) {
   validateUserId(req, res);
   const data = req.body;
+	console.log('TCL: createOrder -> data', data)
   validateSchema(res, data, schema);
   try {
     const { userid: userId } = req.headers;

@@ -6,6 +6,7 @@ export default gql`
       orders {
         _id
         total
+        totalWithPromotion
         items {
           productId
         }

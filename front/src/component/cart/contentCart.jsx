@@ -15,6 +15,7 @@ function ContentCart({
   const loading = get(data, 'loading', true);
   const numberOfproducts = products.length;
   const total = get(cart, 'currentCart.cart.total', 0);
+  const totalWithPromotion = get(cart, 'currentCart.cart.totalWithPromotion', 0);
   const itemsToOrder = get(cart, 'currentCart.cart.items', []);
 
   const createOrder = async () => {
@@ -23,7 +24,9 @@ function ContentCart({
       productId: item.productId,
     }));
 
-    await createOrderMutation({ total, items, adress: user.adress });
+    await createOrderMutation({
+      totalWithPromotion, total, items, adress: user.adress,
+    });
     openPopUpFunction('le commande a été passé avec succés');
   };
 
@@ -46,6 +49,7 @@ function ContentCart({
       <div style={{ width: '100%', textAlign: 'center' }}>
         <p>adresse de livraion: {user.adress}</p>
         <p>Total panier: {total}</p>
+        <p>Total avec reduction: {totalWithPromotion}</p>
         <p>Total produits: {numberOfproducts}</p>
       </div>
     );

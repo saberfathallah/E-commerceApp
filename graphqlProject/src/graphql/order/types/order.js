@@ -3,7 +3,8 @@ const order = `
 type Order {
   _id: ID
   adress: String
-  total: Int
+  total: Float
+  totalWithPromotion: Float
   items: [itemOrder]
 }
 
@@ -25,7 +26,8 @@ input itemOrderInput {
 
 input orderInput {
   adress: String
-  total: Int
+  total: Float
+  totalWithPromotion: Float
   items: [itemOrderInput]
 }
 

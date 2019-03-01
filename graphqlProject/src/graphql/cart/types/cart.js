@@ -4,10 +4,13 @@ type itemCart {
   productId: ID
   quantity: Int
   price: Float
+  isPromo: Boolean
+  promotionPrice: Float
 }
 type Cart {
   userId: ID
   total: Float
+  totalWithPromotion: Float
   items: [itemCart]
 }
 

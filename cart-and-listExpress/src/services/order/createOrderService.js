@@ -6,6 +6,7 @@ async function createOrderService(userId, data) {
     userId,
     adress: data.adress,
     total: data.total,
+    totalWithPromotion: data.totalWithPromotion,
   });
   forEach(data.items, item => order.items.push(item));
   return order.save();

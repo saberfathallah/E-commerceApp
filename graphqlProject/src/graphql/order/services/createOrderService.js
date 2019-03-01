@@ -25,7 +25,6 @@ async function modifyTopSalesMicroServices(quantity, productId) {
 }
 
 async function createOrderService(data, userid) {
-	console.log('TCL: createOrderService -> data', data)
   const result = await createOrderServiceMicroServices(data, userid);
   if (result.status !== 200) {
     return { error: 'error cannot add order' };

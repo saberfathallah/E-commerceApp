@@ -10,6 +10,8 @@ const CartSchema = mongoose.Schema({
     productId: { type: ObjectId, required: true },
     quantity: { type: Number, required: true },
     price: { type: Number, index: true, required: true },
+    isPromo: { type: Boolean },
+    promotionPrice: { type: Number },
   }],
 });
 

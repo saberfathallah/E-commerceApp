@@ -32,6 +32,7 @@ function Orders({
               <tr>
                 <th>N° commande</th>
                 <th>total</th>
+                <th>totalavec réduction</th>
                 <th>NUMBER OF PRODUCTS</th>
                 <th>ACTIONS</th>
               </tr>
@@ -45,6 +46,7 @@ function Orders({
                 <tr key={index}>
                   <td>{order._id}</td>
                   <td>{order.total}</td>
+                  <td>{order.totalWithPromotion}</td>
                   <td>{order.items.length}</td>
                   <td>
                     <Button

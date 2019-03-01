@@ -12,6 +12,7 @@ const OrderSchema = mongoose.Schema({
   }],
   adress: String,
   total: Number,
+  totalWithPromotion: Number,
 }, { timestamps: {} });
 
 const Order = mongoose.model('Order', OrderSchema);

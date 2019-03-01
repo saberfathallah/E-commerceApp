@@ -12,7 +12,7 @@ import PopupInv from '../modals/popup';
 function Navigation({
   className, user, history, cart, usersInvitations,
 }) {
-  const total = get(cart, 'currentCart.cart.total', []);
+  const total = get(cart, 'currentCart.cart.totalWithPromotion', '');
   return (
     <div className={className}>
       <ul className="menu">

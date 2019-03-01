@@ -19,7 +19,8 @@ export default function createHtml(body) {
                   </div>
                   <p>Détails commande</p>
                   <p>num  commande: ${body._id}</p>
-                  <p>nombre des produits: ${body.total}</p>
+                  <p>Total: ${body.total}</p>
+                  <p>Total avec reduction: ${body.totalWithPromotion}</p>
                   <p>nombre des produits: ${body.items.length}</p>
                   <p>adresse de client: ${body.adress}</p>
                   </body>
