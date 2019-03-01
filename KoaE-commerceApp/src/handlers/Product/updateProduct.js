@@ -13,7 +13,7 @@ const schema = Joi.object().keys({
   categoryId: Joi.string(),
   promotions: Joi.object({
     typePromo: Joi.string(),
-    value: Joi.string(),
+    value: Joi.number(),
     label: Joi.string(),
     startDatePromotion: Joi.number(),
     endDatePromotion: Joi.number(),

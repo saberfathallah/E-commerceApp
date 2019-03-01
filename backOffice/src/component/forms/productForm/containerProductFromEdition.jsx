@@ -8,13 +8,15 @@ class ContainerProductFormEdition extends React.Component {
     startDate: moment(),
     endDate: moment(),
     isPromo: false,
+    isChangeDateStart: false,
+    isChangeDateEnd: false,
   };
 
   handleChangeStartDate = (date) => {
-    this.setState({ startDate: date });
+    this.setState({ startDate: date, isChangeDateStart: true });
   }
   handleChangeEndDate = (date) => {
-    this.setState({ endDate: date });
+    this.setState({ endDate: date, isChangeDateEnd: true });
   }
 
   addPromotion = () => {
@@ -23,7 +25,9 @@ class ContainerProductFormEdition extends React.Component {
 
   render() {
     const { match } = this.props;
-    const { startDate, endDate, isPromo } = this.state;
+    const {
+      startDate, endDate, isPromo, isChangeDateStart, isChangeDateEnd,
+    } = this.state;
     return (
       <ProductFormEdition
         startDate={startDate}
@@ -33,6 +37,8 @@ class ContainerProductFormEdition extends React.Component {
         idProduct={match.params.id}
         isPromo={isPromo}
         addPromotion={this.addPromotion}
+        isChangeDateStart={isChangeDateStart}
+        isChangeDateEnd={isChangeDateEnd}
       />);
   }
 }

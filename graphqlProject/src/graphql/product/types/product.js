@@ -1,11 +1,10 @@
 
 const product = `
-
   type promotionsType {
     typePromo: String
     startDatePromotion: Float
     endDatePromotion: Float
-    value: String
+    value: Int
     label: String
   }
 
@@ -13,7 +12,7 @@ const product = `
     typePromo: String
     startDatePromotion: Float
     endDatePromotion: Float
-    value: String
+    value: Int
     label: String
   }
 

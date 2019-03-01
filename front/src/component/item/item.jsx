@@ -10,6 +10,7 @@ import RemoveProductFromCart from './removeProductFromCart';
 import WrapperItem from './itemWrapper';
 import currentCart from '../../graphql/cart/currentCart';
 import RatingProduct from '../rating';
+import getPromotionPrice from '../../utils/getPromotionPrice';
 
 class Item extends Component {
   shouldComponentUpdate(nextProps) {
@@ -55,10 +56,18 @@ class Item extends Component {
           />
           <h3>{title}</h3>
           <div className="item__price-tag">
-            <p className="item__price-line-through">
-              {price} {'$'}
-            </p>
-            <p>{price / 2 } {'$'}</p>
+            {isPromo ?
+              <div>
+                <p className="item__price-line-through">
+                  {price} {'$'}
+                </p>
+                <p>{price - getPromotionPrice(price, promotions.value)} {'$'}</p>
+              </div>
+              :
+              <p>
+                {price} {'$'}
+              </p>
+            }
           </div>
           <p style={styles.title}>{description}</p>
           <div className="item-promotion">

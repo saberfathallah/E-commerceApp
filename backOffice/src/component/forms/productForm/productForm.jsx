@@ -8,10 +8,22 @@ import ErrorMessage from '../../../utils/errorMessage';
 import ALL_CATEGORIES from '../../../graphql/category/getAllCategories';
 import withFormWrapper from '../withFormWrapper';
 import PickerDate from '../../datePicker';
+import { percentagePromotion } from './productFormEdition';
 
 class ProductForm extends Component {
   componentDidMount() {
 
+  }
+
+  getDate = (isChange, value, date) => {
+    const {
+      isPromo,
+    } = this.props;
+    if (isPromo) {
+      if (isChange) return date;
+      return value;
+    }
+    return date;
   }
   render() {
     const categories = get(this.props, 'data.getAllCategories.categories', []);
@@ -36,7 +48,10 @@ class ProductForm extends Component {
       errors,
       addPromotion,
       isPromo,
+      isChangeDateStart,
+      isChangeDateEnd,
     } = this.props;
+    console.log('TCL: this.props', this.props);
 
     return (
       <div className={className}>
@@ -142,14 +157,31 @@ class ProductForm extends Component {
             <div style={{ display: 'flex', textAlign: 'center' }}>
               <PickerDate
                 begin
-                startDate={startDate}
+                startDate={
+                  this.getDate(isChangeDateStart, values.promotions.startDatePromotion, startDate)}
                 handleChangeStartDate={handleChangeStartDate}
               />
               <PickerDate
                 end
-                endDate={endDate}
+                endDate={
+                  this.getDate(isChangeDateEnd, values.promotions.endDatePromotion, endDate)}
                 handleChangeEndDate={handleChangeEndDate}
               />
+              <Form.Field className="contact-form__left-field">
+                <select
+                  name="promotions"
+                  placeholder="promotions"
+                  value={values.promotion}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                >
+                  <option value="">type de promotion</option>
+                  {map(percentagePromotion, (promo, index) => (
+                    // eslint-disable-next-line no-underscore-dangle
+                    <option value={promo.label} key={index}>{promo.label}</option>))}
+                </select>
+                {isBadCategoryId && <ErrorMessage error={errors.categoryId} />}
+              </Form.Field>
             </div>
             }
           </div>
@@ -180,6 +212,8 @@ ProductForm.propTypes = {
   startDate: PropTypes.object,
   endDate: PropTypes.object,
   isPromo: PropTypes.bool,
+  isChangeDateStart: PropTypes.bool,
+  isChangeDateEnd: PropTypes.bool,
   handleBlur: PropTypes.func,
   handleSubmit: PropTypes.func,
   errors: PropTypes.object,

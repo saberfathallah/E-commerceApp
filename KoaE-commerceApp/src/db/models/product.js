@@ -23,7 +23,7 @@ let productSchema = new mongoose.Schema({
     typePromo: String,
     startDatePromotion: Number,
     endDatePromotion: Number,
-    value: String,
+    value: Number,
     label: String,
   },
   isPromo: Boolean,

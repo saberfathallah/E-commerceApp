@@ -9,6 +9,13 @@ query {
       quantity
       description
       _id
+      isPromo
+      promotions {
+        startDatePromotion
+        endDatePromotion
+        value
+        label
+      }
     }
     error
   }
