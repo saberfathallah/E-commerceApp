@@ -7,9 +7,9 @@ import Popup from 'reactjs-popup';
 import AcceptOrRefuseInvitation from '../buttonInvitation';
 
 const PopupInv = ({ usersInvitations }) => {
-  const allClients = map(usersInvitations, (user) =>
+  const allClients = map(usersInvitations, (user, index) =>
     (
-      <div style={{ lineHeight: '100%' }}>
+      <div key={index} style={{ lineHeight: '100%' }}>
         <Table basic="very" celled collapsing>
           <Table.Body>
             <Table.Row>

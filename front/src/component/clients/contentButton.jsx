@@ -21,7 +21,7 @@ const ContentButton = ({
 
 ContentButton.propTypes = {
   id: PropTypes.string,
-  allInvitedIds: PropTypes.object,
+  allInvitedIds: PropTypes.array,
   isInvited: PropTypes.bool,
   isFriend: PropTypes.bool,
 };

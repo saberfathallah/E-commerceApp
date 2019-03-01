@@ -19,11 +19,11 @@ function Clients({
   const clients = get(data, 'getAllClients.users', []);
   const friends = get(listOfFriends, 'getListOfFriends.users', []);
   const friendsIds = map(friends, (friend) => friend._id);
-  const allClients = map(clients, (client) => {
+  const allClients = map(clients, (client, index) => {
     const isInvited = includes(invitations, client._id);
     const isFriend = includes(friendsIds, client._id);
     return (
-      <div className={className}>
+      <div key={index} className={className}>
         <Table basic="very" celled collapsing>
           <Table.Body>
             <Table.Row>
@@ -58,7 +58,7 @@ function Clients({
 
 Clients.propTypes = {
   data: PropTypes.object,
-  className: PropTypes.object,
+  className: PropTypes.string,
   listOfClientInvited: PropTypes.object,
   invitations: PropTypes.array,
   listOfFriends: PropTypes.object,

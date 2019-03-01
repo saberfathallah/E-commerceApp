@@ -41,7 +41,7 @@ class Cart extends Component {
             icon="credit card"
             link
             onClick={() => this.handleClick('cartDetails', 1)}
-            title="votre pannier"
+            title="votre pannier "
             description="votre pannier"
             comp
           />
