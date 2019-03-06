@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/label-has-for */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable react/jsx-no-comment-textnodes */
 /* eslint-disable no-underscore-dangle */
@@ -77,18 +78,25 @@ class SideBare extends Component {
       );
     });
 
+    console.log('TCL: SideBare -> categories -> categories', categories);
     return (
       <div className={className}>
-        <div className="sidebar-nav-tite">
-          Categories
+        <div className="card mb-3">
+          <div className="card-header">
+            <h3>Categories</h3>
+          </div>
+          {loading ?
+            <Icon name="circle notched" loading /> :
+            <ul className="list-group">
+              {allCategories.map((cat) => (
+                // eslint-disable-next-line jsx-a11y/label-has-for
+                <li className="list-group-item">
+                  <label onClick={() => this.handleItemClick(cat)} className="custom-checkbox text-capitalize"> {cat.name}
+                  </label>
+                </li>
+              ))}
+            </ul>}
         </div>
-        {loading ?
-          <Icon name="circle notched" loading /> :
-          <div>
-            <Menu vertical>
-              {categories}
-            </Menu>
-          </div>}
 
       </div>
     );

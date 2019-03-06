@@ -53,7 +53,14 @@ class InfiniteScrollItems extends Component {
           {items.map((product) => (<Item
             user={user}
             favortieList={favortieList}
-            img="../asset/product1.png"
+            // eslint-disable-next-line react/jsx-no-duplicate-props
+            images={[
+              'https://productimages.hepsiburada.net/s/18/135/9801259057202.jpg?v1',
+              'https://productimages.hepsiburada.net/s/18/280-413/9801258663986.jpg?v1',
+              'https://productimages.hepsiburada.net/s/18/280-413/9801258696754.jpg?v1',
+              'https://productimages.hepsiburada.net/s/18/280-413/9801258729522.jpg?v1',
+              'https://productimages.hepsiburada.net/s/18/280-413/9801258762290.jpg?v1',
+            ]}
             title={product.name}
             description={product.description}
             price={product.price}

@@ -1,70 +1,115 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+// /* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withRouter, Link } from 'react-router-dom';
+import { NavLink, Link, withRouter } from 'react-router-dom';
 import { compose, graphql } from 'react-apollo';
 import { get } from 'lodash';
 import WrapperNavigation from './withNavigationWrapper';
-import { removeCookie } from '../../utils/cookiesStore';
 import ALL_INVITATIONS from '../../graphql/invitation/getAllInvitation';
 import PopupInv from '../modals/popup';
 
-function Navigation({
-  className, user, history, cart, usersInvitations,
-}) {
+const Navigation = ({
+  className, user, cart, history, usersInvitations,
+}) => {
   const total = get(cart, 'currentCart.cart.totalWithPromotion', '');
+
   return (
     <div className={className}>
-      <ul className="menu">
-        <li><a href="/">Home</a></li>
-        {user.firstName &&
-          <div style={{ display: 'inline' }}>
-            <li><Link to="/FavoriteList">Favorites</Link></li>
-            <li><Link to="/cart">Panier</Link></li>
-            <li><Link to="/orders">Commandes</Link></li>
-            <li><Link to="/clients">clients</Link></li>
-          </div>
-        }
-      </ul>
-      <div className="right-side">
-        {user.firstName ?
+      <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div className="container">
+          <NavLink className="navbar-brand" to="/">Ecommerce</NavLink>
+          {user.firstName &&
           <div>
-            <span className="navigation-user-name">Total panier: {total} $</span>
-            <span className="navigation-user-name">{user.firstName} {user.lastName}</span>
-            <PopupInv usersInvitations={usersInvitations} />
-            <button
-              onClick={() => {
-                removeCookie('token', { path: '/' });
-                removeCookie('token', { path: '/home' });
-                localStorage.removeItem('token');
-                window.location.reload();
-                history.push('/');
-              }}
-              className="logout-btn"
-            >
-              déconnexion
-            </button>
+            <Link className="link-navigation" to="/cart">Panier</Link>
+            <Link className="link-navigation" to="/orders">Commandes</Link>
+            <Link className="link-navigation" to="/clients">clients</Link>
           </div>
-          :
-          <div style={{ float: 'right' }}>
-            <button onClick={() => history.push('/register')} >register</button>
-            <button
-              onClick={() => {
-                history.push('/Login');
-              }}
-            >Login
-            </button>
-          </div>}
-      </div>
+          }
+          <button
+            className="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target="#navbarResponsive"
+            aria-controls="navbarResponsive"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span className="navbar-toggler-icon"></span>
+          </button>
+          <div className="collapse navbar-collapse" id="navbarResponsive">
+            {user.firstName ?
+              <ul className="navbar-nav ml-auto">
+                <li className="nav-item">
+                  <p
+                    className="nav-link"
+                    aria-hidden="true"
+                  >{user.firstName}
+                  </p>
+                </li>
+                <li className="nav-item">
+                  <p
+                    className="nav-link"
+                    aria-hidden="true"
+                  >Total panier: {total} $
+                  </p>
+                </li>
+                <li className="nav-item">
+                  <span
+                    className="nav-link"
+                    onClick={() => {
+                      localStorage.removeItem('token');
+                      window.location.reload();
+                      history.push('/');
+                    }}
+                  >
+                    <i
+                      className="fa fa-shopping-cart mr-2"
+                      aria-hidden="true"
+                    /> déconnexion
+                  </span>
+                </li>
+                <li className="nav-item">
+                  <PopupInv className="nav-link" usersInvitations={usersInvitations} />
+                </li>
+              </ul> :
+              <ul className="navbar-nav ml-auto">
+                <li className="nav-item" style={{ color: 'white' }}>
+                  <span
+                    onClick={() => history.push('/register')}
+                  >
+                    <i
+                      className="fa fa-shopping-cart mr-2"
+                      aria-hidden="true"
+                    /> register
+                  </span>
+                </li>
+
+                <li className="nav-item" style={{ color: 'white' }}>
+                  <span
+                    onClick={() => history.push('/Login')}
+                  >
+                    <i
+                      className="link-navigation"
+                      aria-hidden="true"
+                    /> login
+                  </span>
+                </li>
+              </ul>
+            }
+          </div>
+        </div>
+      </nav>
     </div>
   );
-}
-
+};
 Navigation.propTypes = {
   className: PropTypes.string,
-  history: PropTypes.object,
   user: PropTypes.object,
   cart: PropTypes.object,
+  history: PropTypes.object,
   usersInvitations: PropTypes.array,
 };
 

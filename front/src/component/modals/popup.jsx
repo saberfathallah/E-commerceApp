@@ -30,7 +30,7 @@ const PopupInv = ({ usersInvitations }) => {
       </div>
     ));
   return (
-    <Popup trigger={<button>{usersInvitations.length}</button>} position="bottom center">
+    <Popup trigger={<button style={{ color: 'red' }}>{usersInvitations.length}</button>} position="bottom center">
       {allClients.length === 0 ? <p>empty invitations</p> : <div>{allClients}</div>}
     </Popup>
   );

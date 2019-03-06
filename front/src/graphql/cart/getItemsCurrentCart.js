@@ -9,7 +9,16 @@ export default gql`
         price
         quantity
         image
+        rate
+        userRateCount
         _id
+        isPromo
+        promotions {
+          startDatePromotion
+          endDatePromotion
+          value
+          label
+        }
       }
       error
     }
