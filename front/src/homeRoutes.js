@@ -15,6 +15,7 @@ import currentCart from './graphql/cart/currentCart';
 import Orders from '../src/component/orders';
 import Order from '../src/component/order';
 import Clients from '../src/component/clients';
+import ItemDetails from '../src/pages/itemDetails';
 
 function RoutesHome({
   data, loading, cart,
@@ -35,6 +36,7 @@ function RoutesHome({
           <Route path="/orders" render={() => <Orders user={user} />} exact />
           <Route exact path="/order/:id" component={withRouter(Order)} />
           <Route exact path="/clients" component={Clients} />
+          <Route exact path="/itemDetails/:id" component={withRouter(ItemDetails)} />
         </Switch>
       </div>
     </div>

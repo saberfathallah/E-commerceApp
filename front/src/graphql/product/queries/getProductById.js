@@ -11,7 +11,16 @@ query getProductById($id: ID!) {
       description
       image
       categoryId
+      rate
+      userRateCount
       _id
+      isPromo
+      promotions {
+        startDatePromotion
+        endDatePromotion
+        value
+        label
+      }
     }
     error
   }

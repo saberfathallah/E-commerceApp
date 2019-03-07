@@ -41,6 +41,7 @@ class Item extends Component {
   handleImageChange = (e) => {
     const { images } = this.props;
     const currentX = e.clientX - cumulativeOffSet(this.imageRef.current).left;
+    // hover actuel par aport a l''image
     const part = this.imageRef.current.clientWidth / images.length;
 
     let imgIndex = Math.ceil(currentX / part) - 1;
@@ -92,10 +93,10 @@ render() {
       {isCartItem && <RemoveProductFromCart productId={id} />}
       <AddOrRemoveFavorite isFavorite={isFavorite} user={user} productId={id} />
       <div style={styles.card}>
-        <Link to={`/products/${id}`} className="product__link">
+        <Link to={`/itemDetails/${id}`} className="product__link">
           <img
             onMouseMove={(e) => this.handleImageChange(e)}
-            onMouseOut={() => this.handleMouseOut}
+            onMouseOut={() => this.handleMouseOut()}
             style={{ width: 209, height: 251 }}
             src={this.state.img}
             alt={title}
