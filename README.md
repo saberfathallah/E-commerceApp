@@ -1,6 +1,6 @@
 # E-commerceApp
 
-E-commerce this application developped with ReactJs, Apollo, Redux, Graphql, apolloServer, nodeJs, Koa, Express
+E-commerce application developped with ReactJs, Apollo, Redux, Graphql, apolloServer, nodeJs, Koa, Express
 
 git clone https://github.com/saberfathallah/E-commerceApp.git
 
