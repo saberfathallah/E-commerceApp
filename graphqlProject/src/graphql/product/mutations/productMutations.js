@@ -28,13 +28,11 @@ export const Resolvers = {
       return result;
     },
   ),
-  updateProduct: combineResolvers(
-    isAuthenticated,
-    async (_, { input, id }, { user }) => {
-      const result = await updateProduct(input, id, user._id);
+  updateProduct:
+    async (_, { input, id }) => {
+      const result = await updateProduct(input, id);
       return result;
     },
-  ),
   modifyRatingProduct: combineResolvers(
     isAuthenticated,
     async (_, { id, rate }) => {
