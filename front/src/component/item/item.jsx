@@ -16,6 +16,7 @@ import RatingProduct from '../rating';
 import getPromotionPrice from '../../utils/getPromotionPrice';
 import { cumulativeOffSet } from '../../utils/cumulativeOffSet';
 import SlideDots from '../slideDots';
+import withUpdateProductMutation from '../../graphql/product/mutations/updateProduct/withUpdateProductMutation';
 
 class Item extends Component {
   constructor(props) {
@@ -46,22 +47,34 @@ class Item extends Component {
   }
 
   setTimer() {
-    if (this.props.promotions) {
-      setInterval(() => {
+    const { isPromo, promotions } = this.props;
+    if (isPromo && promotions) {
+      setInterval(async () => {
         const dateNow = new Date();
-        const dateEnd = new Date(Number(get(this.props.promotions, 'endDatePromotion', null)));
-        let seconds = Math.floor((dateEnd - dateNow) / 1000);
-        let minutes = Math.floor(seconds / 60);
-        let hours = Math.floor(minutes / 60);
-        const days = Math.floor(hours / 24);
-        hours -= (days * 24);
-        minutes = minutes - (days * 24 * 60) - (hours * 60);
-        seconds = seconds - (days * 24 * 60 * 60) - (hours * 60 * 60) - (minutes * 60);
-        const expireDate = `reste: ${days} Jours, ${hours} Heurs, ${minutes} Minutes et ${seconds} Secondes`;
-        this.setState({ expireDate });
+        const expireD = Number(get(this.props.promotions, 'endDatePromotion', null));
+        const dateNowStamp = new Date(dateNow).getTime();
+        const diff = expireD - dateNowStamp;
+        const dateEnd = new Date(expireD);
+        if (diff > 0) {
+          let seconds = Math.floor((dateEnd - dateNow) / 1000);
+          let minutes = Math.floor(seconds / 60);
+          let hours = Math.floor(minutes / 60);
+          const days = Math.floor(hours / 24);
+          hours -= (days * 24);
+          minutes = minutes - (days * 24 * 60) - (hours * 60);
+          seconds = seconds - (days * 24 * 60 * 60) - (hours * 60 * 60) - (minutes * 60);
+          const expireDate = `reste: ${days} Jours, ${hours} Heurs, ${minutes} Minutes et ${seconds} Secondes`;
+          this.setState({ expireDate });
+        } else {
+          await this.props.updateProductMutation({
+            isPromo: false,
+          }, this.props.id);
+        }
       }, 1000);
     }
   }
+
+  // fix validation date date end > date start and date start> date now
 
   handleImageChange = (e) => {
     const { images } = this.props;
@@ -158,8 +171,8 @@ render() {
               <p>{promotions.label}</p>
               <div className="item-promotion-date">
                 <div>
-                  <div>{`de ${format(dateStart, 'DD/MM/YYYY')}`}</div>
-                  <div>{`jusqu'a ${format(dateEnd, 'DD/MM/YYYY')}`}</div>
+                  <div>{`de ${format(dateStart, 'YYYY-MM-DDThh:mm:ss')}`}</div>
+                  <div>{`jusqu'a ${format(dateEnd, 'YYYY-MM-DDThh:mm:ss')}`}</div>
                 </div>
                 <div>{expireDate}</div>
               </div>
@@ -202,10 +215,12 @@ Item.propTypes = {
   userRateCount: PropTypes.number,
   isPromo: PropTypes.bool,
   promotions: PropTypes.object,
+  updateProductMutation: PropTypes.func,
 };
 
 export default compose(
   WrapperItem,
+  withUpdateProductMutation,
   graphql(currentCart, {
     props: ({ data, ownProps }) => {
       const items = get(data, 'currentCart.cart.items', []);
