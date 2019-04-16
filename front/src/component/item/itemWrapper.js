@@ -24,7 +24,7 @@ margin-top: -5px;
 }
 
 .item-promotion {
-  height: 32px;
+  background: #f5933c;
 }
 
 .item-promotion-label {
