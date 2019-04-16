@@ -23,7 +23,6 @@ const schema = Joi.object().keys({
 async function createOrder(req, res) {
   validateUserId(req, res);
   const data = req.body;
-	console.log('TCL: createOrder -> data', data)
   validateSchema(res, data, schema);
   try {
     const { userid: userId } = req.headers;
