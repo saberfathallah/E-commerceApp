@@ -23,8 +23,13 @@ class Item extends Component {
     this.state = {
       img: this.props.images[0],
       aItem: 0,
+      expireDate: '',
     };
     this.imageRef = React.createRef();
+  }
+
+  componentDidMount() {
+    this.setTimer();
   }
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -35,7 +40,27 @@ class Item extends Component {
     );
     return (
       this.props.cartItemQuantity !== nextProps.cartItemQuantity ||
-      isFavorite !== isFavoriteNext || this.state.aItem !== nextState.aItem);
+      isFavorite !== isFavoriteNext || this.state.aItem !== nextState.aItem
+      || this.state.expireDate !== nextState.expireDate
+    );
+  }
+
+  setTimer() {
+    if (this.props.promotions) {
+      setInterval(() => {
+        const dateNow = new Date();
+        const dateEnd = new Date(Number(get(this.props.promotions, 'endDatePromotion', null)));
+        let seconds = Math.floor((dateEnd - dateNow) / 1000);
+        let minutes = Math.floor(seconds / 60);
+        let hours = Math.floor(minutes / 60);
+        const days = Math.floor(hours / 24);
+        hours -= (days * 24);
+        minutes = minutes - (days * 24 * 60) - (hours * 60);
+        seconds = seconds - (days * 24 * 60 * 60) - (hours * 60 * 60) - (minutes * 60);
+        const expireDate = `reste: ${days} Jours, ${hours} Heurs, ${minutes} Minutes et ${seconds} Secondes`;
+        this.setState({ expireDate });
+      }, 1000);
+    }
   }
 
   handleImageChange = (e) => {
@@ -85,9 +110,11 @@ render() {
     isPromo,
     promotions,
   } = this.props;
+  const { expireDate } = this.state;
   const isFavorite = includes(favortieList, id);
   const promotionPrice = isPromo ? getPromotionPrice(price, promotions.value) : 0;
-
+  const dateStart = new Date(Number(get(promotions, 'startDatePromotion', null)));
+  const dateEnd = new Date(Number(get(promotions, 'endDatePromotion', null)));
   return (
     <div className={className}>
       {isCartItem && <RemoveProductFromCart productId={id} />}
@@ -128,10 +155,13 @@ render() {
           {isPromo &&
             <div>
               <img className="item_img-promo" src="../asset/Label-offre-ic@2x.png" />
-              <p style={{ float: 'left' }}>{promotions.label}</p>
+              <p>{promotions.label}</p>
               <div className="item-promotion-date">
-                <p>{`de ${format(new Date(Number(promotions.startDatePromotion)), 'DD/MM/YYYY')}`}</p>
-                <p>{`jusqu'a ${format(new Date(Number(promotions.endDatePromotion)), 'DD/MM/YYYY')}`}</p>
+                <div>
+                  <div>{`de ${format(dateStart, 'DD/MM/YYYY')}`}</div>
+                  <div>{`jusqu'a ${format(dateEnd, 'DD/MM/YYYY')}`}</div>
+                </div>
+                <div>{expireDate}</div>
               </div>
             </div>
           }
