@@ -4,6 +4,7 @@ import { withFormik } from 'formik';
 import { get } from 'lodash';
 import PropTypes from 'prop-types';
 import { compose } from 'react-apollo';
+import { connect } from 'react-redux';
 import { Form, Container, Button, Input } from 'semantic-ui-react';
 import { withRouter } from 'react-router-dom';
 
@@ -12,6 +13,7 @@ import ErrorMessage from '../../utils/errorMessage';
 import validatorsFunctions, { validateObject } from '../../utils/validator';
 import { setCookie, removeCookie } from '../../utils/cookiesStore';
 import withLoginWrapper from './withLoginWrapper';
+import { dispatchEventA } from '../../utils/events/actions';
 
 Login.propTypes = {
   values: PropTypes.shape({
@@ -51,8 +53,9 @@ const formikHoc = withFormik({
       setCookie('token', get(user, 'data.loginUser.token'), { path: '/' });
       removeCookie('token', { path: '/home' });
       localStorage.setItem('token', get(user, 'data.loginUser.token'));
-      window.location.reload();
       props.history.push('/');
+      window.location.reload();
+      props.dispatchEventAhandler(props.type, props.selector);
     }
   },
 });
@@ -98,4 +101,21 @@ function Login(props) {
   );
 }
 
-export default compose(withLoginWrapper, withLoginMutation, formikHoc, withRouter)(Login);
+const mapStateToProps = (state) => ({
+  type: state.eventReducer.type,
+  selector: state.eventReducer.selector,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  dispatchEventAhandler: (type, selector) => {
+    dispatch(dispatchEventA(type, selector));
+  },
+});
+
+export default compose(
+  connect(mapStateToProps, mapDispatchToProps),
+  withLoginWrapper,
+  withLoginMutation,
+  formikHoc,
+  withRouter,
+)(Login);

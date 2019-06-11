@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'react-apollo';
-import { get } from 'lodash';
+import { withRouter } from 'react-router-dom';
 import { Button, Image } from 'semantic-ui-react';
 import withAddProductToCartMutation from '../../graphql/cart/addProductToCart/withAddProductToCartMutation';
 import withUpdateQuantityOrRemoveProductMutation from '../../graphql/cart/updateQuantityOrRemoveProduct/withUpdateQuantityOrRemoveProductMutation';
@@ -18,9 +18,10 @@ class AddOrRemoveToCart extends Component {
       maxQuantity,
       price,
       id,
-      user,
       isPromo,
       promotionPrice,
+      addEventhandler,
+      history,
     } = this.props;
 
     return (
@@ -52,11 +53,13 @@ class AddOrRemoveToCart extends Component {
           :
           <button
             style={styles.add}
+            id={`event-${id}`}
             onClick={() => {
-              if (get(user, 'firstName', '')) {
+              if (localStorage.getItem('token')) {
                 addProductToCartMutation(id, 1, price, isPromo, price - promotionPrice);
               } else {
-                alert('you need to connect');
+                addEventhandler('click', `#event-${id}`);
+                history.push('/login');
               }
             }
             }
@@ -69,6 +72,7 @@ class AddOrRemoveToCart extends Component {
     );
   }
 }
+
 AddOrRemoveToCart.propTypes = {
   className: PropTypes.string,
   addProductToCartMutation: PropTypes.func,
@@ -77,12 +81,14 @@ AddOrRemoveToCart.propTypes = {
   maxQuantity: PropTypes.number,
   cartItemQuantity: PropTypes.number,
   id: PropTypes.string,
-  user: PropTypes.object,
   isPromo: PropTypes.bool,
   promotionPrice: PropTypes.number,
+  addEventhandler: PropTypes.func,
+  history: PropTypes.object,
 };
 
 export default compose(
+  withRouter,
   withAddProductToCartMutation,
   withUpdateQuantityOrRemoveProductMutation,
 )(AddOrRemoveToCart);

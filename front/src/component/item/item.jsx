@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { graphql, compose } from 'react-apollo';
 import { includes, find, get } from 'lodash';
+import { connect } from 'react-redux';
 import format from 'date-fns/format';
 import AddOrRemoveFavorite from '../buttonHeart';
 import AddOrRemoveToCart from './addorRemoveToCart';
@@ -17,6 +18,7 @@ import getPromotionPrice from '../../utils/getPromotionPrice';
 import { cumulativeOffSet } from '../../utils/cumulativeOffSet';
 import SlideDots from '../slideDots';
 import withUpdateProductMutation from '../../graphql/product/mutations/updateProduct/withUpdateProductMutation';
+import { addEvent } from '../../utils/events/actions';
 
 class Item extends Component {
   constructor(props) {
@@ -122,6 +124,7 @@ render() {
     userRateCount,
     isPromo,
     promotions,
+    addEventhandler,
   } = this.props;
   const { expireDate } = this.state;
   const isFavorite = includes(favortieList, id);
@@ -131,7 +134,12 @@ render() {
   return (
     <div className={className}>
       {isCartItem && <RemoveProductFromCart productId={id} />}
-      <AddOrRemoveFavorite isFavorite={isFavorite} user={user} productId={id} />
+      <AddOrRemoveFavorite
+        isFavorite={isFavorite}
+        user={user}
+        productId={id}
+        addEventhandler={addEventhandler}
+      />
       <div style={styles.card}>
         <Link to={`/itemDetails/${id}`} className="product__link">
           <img
@@ -179,10 +187,11 @@ render() {
             </div>
           }
         </div>
-        <RatingProduct id={id} rate={rate} />
+        <RatingProduct id={id} rate={rate} addEventhandle={addEventhandler} />
         <p style={{ fontSize: '7px', float: 'right' }}>{userRateCount} personnes</p>
         {!isOrder &&
           <AddOrRemoveToCart
+            addEventhandler={addEventhandler}
             user={user}
             id={id}
             maxQuantity={quantity}
@@ -216,10 +225,18 @@ Item.propTypes = {
   isPromo: PropTypes.bool,
   promotions: PropTypes.object,
   updateProductMutation: PropTypes.func,
+  addEventhandler: PropTypes.func,
 };
+
+const mapDispatchToProps = (dispatch) => ({
+  addEventhandler: (type, selector) => {
+    dispatch(addEvent(type, selector));
+  },
+});
 
 export default compose(
   WrapperItem,
+  connect(null, mapDispatchToProps),
   withUpdateProductMutation,
   graphql(currentCart, {
     props: ({ data, ownProps }) => {
