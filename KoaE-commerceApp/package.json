@@ -27,7 +27,7 @@
     "koa-bodyparser": "^4.2.1",
     "koa-json-error": "^3.1.2",
     "koa-route": "^3.2.0",
-    "lodash": "^4.17.11",
+    "lodash": "^4.17.19",
     "mongoose": "^5.4.0",
     "nodemon": "^1.18.9",
     "supertest": "^3.3.0"
