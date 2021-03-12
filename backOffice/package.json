@@ -37,7 +37,7 @@
     "react": "^16.0.0",
     "react-apollo": "^2.0.4",
     "react-datepicker": "^1.8.0",
-    "react-dev-utils": "^4.1.0",
+    "react-dev-utils": "^11.0.4",
     "react-dom": "^16.0.0",
     "react-google-charts": "^3.0.10",
     "react-redux": "^5.0.6",
