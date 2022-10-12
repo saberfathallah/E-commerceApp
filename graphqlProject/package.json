@@ -7,7 +7,7 @@
     "dev": "nodemon src/server.js --exec babel-node"
   },
   "dependencies": {
-    "apollo-server": "^2.3.1",
+    "apollo-server": "^2.25.4",
     "babel-cli": "^6.26.0",
     "babel-plugin-transform-export-default": "^7.0.0-alpha.20",
     "babel-preset-env": "^1.7.0",
